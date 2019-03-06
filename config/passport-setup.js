@@ -26,7 +26,7 @@ passport.deserializeUser((serializedUser,done)=>{
         done(null,recycler)
       })
       break
-    case "upcyclers":
+    case "upcycler":
     Upcycler.findById(serializedUser.id).then((upcycler)=>{
       upcycler.userType = "upcycler"
       done(null,upcycler)
@@ -37,47 +37,6 @@ passport.deserializeUser((serializedUser,done)=>{
 
 
 
-passport.serializeUser((user, done) => {
-    done(null, user.id);
-});
-
-passport.deserializeUser((id, done) => {
-    User.findById(id).then((user) => {
-        done(null, user);
-    });
-});
-
-
-
-
-
-passport.use("upcycler-localSignup", new LocalStrategy(
-  function(username,password,done) {
-    Upcycler.findOne({username: username }, function(err, user){
-      if (err) { return done(err); }
-      if (user) {
-        return done(null, false, {message:'That email is already taken.'});
-    } else {
-      var newUpcycler = {
-        userName: req.body.userName,
-        email: req.body.email,
-        companyName: req.body.companyName,
-      }
-      newUpcycler.local.password = newUpcycler.generateHash(password)
-      Upcycler.create(newUpcycler, (err) => {
-          if (err) {
-            console.log(`error occured: ${err}`);
-          } else {
-            res.redirect('/upcycler/profile');
-          }
-        }).then(()=>{
-          console.log("user created", newUpcycler)
-          return done(null, newUpcycler);
-          })
-      }
-    })
-  })
-)
 
 
 /***************************Recycler sign up and login********************************************* */
@@ -93,12 +52,12 @@ passport.use("recycler-localSignup", new LocalStrategy(
         userName: req.body.userName,
         email: req.body.email,
         companyName: req.body.companyName,
+        password:Recycler.generateHash(password)
       }
       Recycler.create(newRecycler, (err) => {
           if (err) {
             console.log(`error occured: ${err}`);
           } else {
-            newRecycler.local.password = newRecycler.generateHash(password)
             newRecycler.userType = "recycler"
             return done(null, newRecycler);
           }
@@ -113,11 +72,8 @@ passport.use("recycler-localLogin", new LocalStrategy(
   function(username, password, done) {
     Upcycler.findOne({ username: username }, function(err, user) {
       if (err) { return done(err); }
-      if (!user) {
-        return done(null, false, { message: 'Incorrect username.' });
-      }
-      if (!user.validPassword(password)) {
-        return done(null, false, { message: 'Incorrect password.' });
+      if (!user || !user.validPassword(password)) {
+        return done(null, false, { message: 'Incorrect username or password.' });
       }
       user.userType="recycler"
       return done(null, user);
@@ -177,12 +133,12 @@ passport.use("upcycler-localSignup", new LocalStrategy(
         userName: req.body.userName,
         email: req.body.email,
         companyName: req.body.companyName,
+        password: Upcycler.generateHash(password)
       }    
       Upcycler.create(newUpcycler, (err) => {
           if (err) {
             console.log(`error occured: ${err}`);
           } else {
-            newUpcycler.local.password = newUpcycler.generateHash(password)
             newUpcycler.userType = "upcycler"
             return done(null, newUpcycler);
           }
@@ -213,15 +169,17 @@ passport.use("google-up",new GoogleStrategy({
   clientID:keys.google.clientID,
   clientSecret:keys.google.clientSecret
 },(accessToken,refreshToken,profile,done)=>{
+  debugger
       Upcycler.findOne({googleId:profile.id}).then((upcycler)=>{
+        debugger
           if (upcycler){
               //user already exists then serilize passsword
               console.log("already exist")
-              // newUpcycler.userType = "upcycler"
+               upcycler.userType = "upcycler"
               done(null,upcycler)
           } else {
               const imageUrl = profile.photos[0].value.replace("?sz=50", "")
-          new Recycler({
+          new Upcycler({
               fullName:profile.displayName,
               firstName:profile.name.givenName,
               lastName:profile.name.familyName,
@@ -230,11 +188,13 @@ passport.use("google-up",new GoogleStrategy({
               imageUrl,
               gender:profile.gender
           }).save().then((newUpcycler)=>{
+            debugger
               console.log("user:" + newUpcycler)
               newUpcycler.userType = "upcycler"
               done(null,newUpcycler)
-          }).catch(()=>{
-              console.log("error")
+          }).catch((error)=>{
+            debugger
+              console.log(error)
           })
       }
   })

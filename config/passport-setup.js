@@ -11,26 +11,41 @@ passport.serializeUser((user,done)=>{
       id: user.id,
       userType: user.userType
   }
+  debugger
   done(null,serializedUser)
 })
 
 
-passport.deserializeUser((user,done)=>{
-  switch(user.userType){
+passport.deserializeUser((serializedUser,done)=>{
+  debugger
+  switch(serializedUser.userType){
     case "recycler":
-      Recycler.findById(id).then((recycler)=>{
+      Recycler.findById(serializedUser.id).then((recycler)=>{
+        debugger
         recycler.userType = "recycler"
         done(null,recycler)
       })
       break
     case "upcyclers":
-    Upcycler.findById(id).then((upcycler)=>{
+    Upcycler.findById(serializedUser.id).then((upcycler)=>{
       upcycler.userType = "upcycler"
       done(null,upcycler)
     })
     break 
   }
 })
+
+
+
+passport.serializeUser((user, done) => {
+    done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+    User.findById(id).then((user) => {
+        done(null, user);
+    });
+});
 
 
 
@@ -130,17 +145,19 @@ passport.use("upcycler-localLogin", new LocalStrategy(
 
 
 
-passport.use(new GoogleStrategy({
+passport.use("google-re",new GoogleStrategy({
   // options for google strategy
   callbackURL:"/recyclers/login/google/redirect",
   clientID:keys.google.clientID,
   clientSecret:keys.google.clientSecret
 },(accessToken,refreshToken,profile,done)=>{
+      debugger
       Recycler.findOne({googleId:profile.id}).then((recycler)=>{
+        debugger
           if (recycler){
               //user already exists then serilize passsword
               console.log("already exist")
-              newRecycler.userType = "recycler"
+              recycler.userType = "recycler"
               done(null,recycler)
           } else {
               const imageUrl = profile.photos[0].value.replace("?sz=50", "")
@@ -166,9 +183,9 @@ passport.use(new GoogleStrategy({
 
 
 
-passport.use(new GoogleStrategy({
+passport.use("google-up",new GoogleStrategy({
   // options for google strategy
-  callbackURL:"/recyclers/login/google/redirect",
+  callbackURL:"/upcyclers/login/google/redirect",
   clientID:keys.google.clientID,
   clientSecret:keys.google.clientSecret
 },(accessToken,refreshToken,profile,done)=>{

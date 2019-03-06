@@ -1,0 +1,71 @@
+.main-container {
+  width: 90%;
+  margin: 20px auto;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+h1 {
+  font-size: 3em;
+  font-weight: 300;
+  color: rgb(43, 136, 43);
+  margin: 20px 10px 10px 0px;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+#second-title {
+  display: none;
+}
+
+.product-title {
+  display: block;
+  font-size: 1.5em;
+  color: rgb(43, 136, 43);
+  margin: 5px auto;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.product-title a:visited {
+  color:  rgba(67, 160, 49, 0.185);
+}
+
+.product-title a:link{
+  color: rgb(43, 136, 43);
+}
+
+h3 {
+  font-size: 1em;
+  color: rgb(43, 136, 43);
+  margin: 0 0 10px 0;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.product-description {
+  font-size: 1em;
+  color: rgb(60, 126, 60);
+  margin: 5px 0;
+  letter-spacing: 1px;
+  text-align: justify;
+}
+
+.product-image-container img {
+  width: 100%;
+}
+
+.hover-shadow-box-animation {
+  display: inline-block;
+  vertical-align: middle;
+  transform: perspective(1px) translateZ(0);
+  margin: 10px;
+  transition-duration: 0.3s;
+  transition-property: box-shadow, transform;
+}
+
+.hover-shadow-box-animation:hover,
+.hover-shadow-box-animation:focus,
+.hover-shadow-box-animation:active {
+  transform: scale(1.2);
+}

@@ -1,9 +1,24 @@
-{{#each product}}
-<h1><a href="/products/product/{{this.id}}">{{this.name}}</a></h1>
-<h2>Produced by: {{this.upcycler.userName}}</h2>
-<p>{{this.description}}</p>
-{{#if user}}
+
+<h1 id="first-title">Created with life in mind</h1>
+<main class="content footer-spacer">
+    {{#each product}}
+    <div class="main-container">
+        <div class="product-container">
+            <div class="product-image-container">
+                <img src="http://productimages.brambleberry.com/2014_Product/Fragrance_Flavor_Ess/GreenTeaCucumber_FO238_Main_A.jpg" alt="product-image">
+            </div>
+            <h2 class="product-title"><a class="hover-shadow-box-animation" href="/products/product/{{this.id}}">{{this.name}}</a></h2>
+            <h3>Produced by: {{this.upcycler.userName}}</h3>
+            {{!-- <p class="product-description">this.description</p> --}}
+        </div>
+    </div>
+
+    {{#if user}}
     <a href="/upcycler/product/{{this.id}}/edit">Edit</a>
     <a href="/upcycler/product/{{this.id}}/delete">Delete</a>
-{{/if}}
-{{/each}}
+    {{/if}}
+
+    {{/each}}
+</main>
+
+

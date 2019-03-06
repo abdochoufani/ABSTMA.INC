@@ -6,19 +6,25 @@ function myFunction(x) {
   }
 
 // Buttons for sign in and log in
+var signupRecycler = $('#signup-recycler');
 var loginRecycler = $('#login-recycler');
 var signupUpcycler = $('#signup-upcycler');
 var loginUpcycler = $('#login-upcycler');
 var cross = $('.cross');
 
-loginRecycler.click(() => {
-  $('.form-section-login-recycler-wrapper').addClass('show').removeClass('hide');
-})
-
 cross.click(() => {
+  $('.form-section-signup-recycler-wrapper').addClass('hide').removeClass('show')
   $('.form-section-login-recycler-wrapper').addClass('hide').removeClass('show')
   $('.form-section-signup-upcycler-wrapper').addClass('hide').removeClass('show')
   $('.form-section-login-upcycler-wrapper').addClass('hide').removeClass('show')
+})
+
+signupRecycler.click(() => {
+  $('.form-section-signup-recycler-wrapper').addClass('show').removeClass('hide');
+})
+
+loginRecycler.click(() => {
+  $('.form-section-login-recycler-wrapper').addClass('show').removeClass('hide');
 })
 
 signupUpcycler.click(() => {

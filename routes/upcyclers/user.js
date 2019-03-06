@@ -14,6 +14,12 @@ router.get('/*',(req,res,next)=>{
 })
 
 
+
+router.get("/logout",(req,res)=>{
+  req.logout();
+  res.redirect('/');
+})
+
 router.get('/profile', (req, res) =>{
     res.render('upcycler/profile', {user:req.user});
     });

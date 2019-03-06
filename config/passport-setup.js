@@ -207,10 +207,6 @@ passport.use("upcycler-localLogin", new LocalStrategy(
   ));
 
 
-
-
-
-
 passport.use("google-up",new GoogleStrategy({
   // options for google strategy
   callbackURL:"/upcyclers/login/google/redirect",

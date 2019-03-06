@@ -2,7 +2,11 @@
     <div class="profile-container">
         <div class="profile-pic-section">
             <div class="profile-img-div">
+                {{#if recycler.imageUrl}}
                 <img class="profile-img" srcset="{{ recycler.imageUrl }}" alt="">
+                {{else}}
+                <img class="profile-img" src="/images/profile-placeholder.png" alt="Upcycler profile photo">
+                {{/if}}
             </div>
             <p class="score">Score: <span id="upcycler-score">{{ recycler.score }}</span></p>
         </div>

@@ -20,7 +20,6 @@ router.get('/profile', (req, res) =>{
 
 
 router.get('/createItem',(req,res)=>{
-
    res.render('Products/createProduct', {user:req.user});
 })
 

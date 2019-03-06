@@ -2,11 +2,6 @@ const router=require('express').Router()
 const Product=require("../../models/products")
 const Recycler=require("../../models/recyclers")
 
-// const authCheckRecycler=(req,res,next)=>{
-//   debugger
-//     if(!req.user || req.user.userType !== "recycler") res.redirect("/") 
-//     else next()
-// }
 
 router.get('/*',(req,res,next)=>{
   debugger

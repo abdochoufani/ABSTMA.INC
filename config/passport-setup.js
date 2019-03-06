@@ -80,6 +80,8 @@ passport.use("upcycler-localSignup", new LocalStrategy(
 )
 
 
+/***************************Recycler sign up and login********************************************* */
+
 passport.use("recycler-localSignup", new LocalStrategy(
   function(username,password,done) {
     Recycler.findOne({username: username }, function(err, user){
@@ -92,57 +94,36 @@ passport.use("recycler-localSignup", new LocalStrategy(
         email: req.body.email,
         companyName: req.body.companyName,
       }
-      newRecycler.local.password = newrecycler.generateHash(password)
-      Upcycler.create(newUpcycler, (err) => {
+      Recycler.create(newRecycler, (err) => {
           if (err) {
             console.log(`error occured: ${err}`);
           } else {
-            return done(null, newUpcycler);
+            newRecycler.local.password = newRecycler.generateHash(password)
+            newRecycler.userType = "recycler"
+            return done(null, newRecycler);
           }
         })
-        // .then(()=>{
-        //   console.log("user created", newUpcycler)
-        //   })
       }
     })
   })
 )
 
 
-passport.use("upcycler-localLogin", new LocalStrategy(
-    function(username, password, done) {
-      Upcycler.findOne({ username: username }, function(err, user) {
-        if (err) { return done(err); }
-        if (!user || !user.validPassword(password)) {
-          return done(null, false, { message: 'Incorrect username or password' });
-        } else {
-        user.userType="upcycler"
-        return done(null, user);
-        }
-      });
-    }
-  ));
-
-
-
-  passport.use("recycler-localLogin", new LocalStrategy(
-    function(username, password, done) {
-      Upcycler.findOne({ username: username }, function(err, user) {
-        if (err) { return done(err); }
-        if (!user) {
-          return done(null, false, { message: 'Incorrect username.' });
-        }
-        if (!user.validPassword(password)) {
-          return done(null, false, { message: 'Incorrect password.' });
-        }
-        user.userType="recycler"
-        return done(null, user);
-      });
-    }
-  ));
-
-
-
+passport.use("recycler-localLogin", new LocalStrategy(
+  function(username, password, done) {
+    Upcycler.findOne({ username: username }, function(err, user) {
+      if (err) { return done(err); }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username.' });
+      }
+      if (!user.validPassword(password)) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      user.userType="recycler"
+      return done(null, user);
+    });
+  }
+));
 
 
 passport.use("google-re",new GoogleStrategy({
@@ -181,6 +162,49 @@ passport.use("google-re",new GoogleStrategy({
   console.log(profile)
 }))
 
+
+
+/***************************Upcycler sign up and login********************************************* */
+
+passport.use("upcycler-localSignup", new LocalStrategy(
+  function(username,password,done) {
+    Recycler.findOne({username: username }, function(err, user){
+      if (err) { return done(err); }
+      if (user) {
+        return done(null, false, {message:'That email is already taken.'});
+    } else {
+      var newUpcycler = {
+        userName: req.body.userName,
+        email: req.body.email,
+        companyName: req.body.companyName,
+      }    
+      Upcycler.create(newUpcycler, (err) => {
+          if (err) {
+            console.log(`error occured: ${err}`);
+          } else {
+            newUpcycler.local.password = newUpcycler.generateHash(password)
+            newUpcycler.userType = "upcycler"
+            return done(null, newUpcycler);
+          }
+        })
+      }
+    })
+  })
+)
+
+passport.use("upcycler-localLogin", new LocalStrategy(
+    function(username, password, done) {
+      Upcycler.findOne({ username: username }, function(err, user) {
+        if (err) { return done(err); }
+        if (!user || !user.validPassword(password)) {
+          return done(null, false, { message: 'Incorrect username or password' });
+        } else {
+        user.userType="upcycler"
+        return done(null, user);
+        }
+      });
+    }
+  ));
 
 
 passport.use("google-up",new GoogleStrategy({

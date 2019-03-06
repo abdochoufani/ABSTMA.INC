@@ -1,0 +1,27 @@
+@media (min-width: 1024px) {
+  h1 {
+    margin: 60px auto;
+    font-size: 6em;
+  }
+
+  .content {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: baseline  
+  }
+
+  .main-container {
+   display: block;
+   width: 30%;
+  }
+
+  .product-image-container {
+    padding: 10% 10% 2% 10%;
+  }
+
+  .footer-spacer {
+    margin-bottom: 60px;
+  }
+
+}

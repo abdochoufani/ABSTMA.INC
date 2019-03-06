@@ -6,6 +6,8 @@ const Product=require('../../models/products')
 
 
 
+/**********************************Sign up local************************************************** */
+
 router.get("/signup",(req,res,next)=>{
     res.send('Welcome to the Signup page for recyclers');
 })
@@ -15,6 +17,9 @@ router.post("/signup",(req,res,next)=> {debugger;next()},passport.authenticate("
     failureRedirect : '/' // redirect back to the signup page if there is an error
 }))
 
+
+/*******************************Login Google ******************************************************/
+
 router.get("/google/login",passport.authenticate('google-re',{scope: ['profile']}))
 
 router.get("/login/google/redirect",passport.authenticate('google-re'),(req,res, next)=>{
@@ -22,11 +27,14 @@ router.get("/login/google/redirect",passport.authenticate('google-re'),(req,res,
 })
 
 
+/***************************************Login local ***********************************************/
+
+
 router.get("/login",(req,res)=>{
     res.send('Welcome to the Signup page for recyclers');   
 })
 
-router.post("/login",passport.authenticate("recycler-localLogin"),(req,res)=>{
+router.post("/login",(req,res,next)=> {debugger;next()},passport.authenticate("recycler-localLogin"),(req,res)=>{
     res.redirect("/recycler/profile",{recycler:req.user})
 })
 

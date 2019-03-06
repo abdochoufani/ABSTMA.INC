@@ -15,7 +15,7 @@ router.get('/signup', (req, res) => {
   res.send('Welcome to the Signup page for Upcyclers');
 });
 
-router.post('/signup', passport.authenticate("recycler-localSignup"),(req,res)=>{
+router.post('/signup', passport.authenticate("upcycler-localSignup"),(req,res)=>{
   res.redirect("/upcycler/profile")
 })
 

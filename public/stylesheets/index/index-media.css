@@ -113,7 +113,6 @@
   
   .upcycler-section {
       width: 45%;
-      
   }
   
   .img-div {
@@ -171,7 +170,7 @@
     display: none;
   }
   
-  .form-section-login-recycler-wrapper, .form-section-signup-upcycler-wrapper, .form-section-login-upcycler-wrapper {
+  .form-section-signup-recycler-wrapper, .form-section-login-recycler-wrapper, .form-section-signup-upcycler-wrapper, .form-section-login-upcycler-wrapper {
       width: 100vw;
       height: 100vh;
       background: rgba(51, 51, 51, 0.7);
@@ -182,16 +181,21 @@
     width: 640px;
     height: 640px;
     top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .form-section-login-recycler .form {
+    margin: 10px auto 10px auto;
+    width: 70%;
   }
   
   .login-recycler-btn-div {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 100px;
-    height: 100%;
+    margin-top: 50px;
+    height: auto;
   }
   
   .fb-btn, .google-btn {

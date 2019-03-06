@@ -11,6 +11,7 @@ const recyclerSchema = new mongoose.Schema({
   googleId:String,
   facebookId:String,
   companyName: String,
+  email: String,
   address: {
     street: {type:String, default:"Not set"},
     city: {type:String,lowercase: true, trim: true , default:"Not set"},

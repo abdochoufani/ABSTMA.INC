@@ -177,7 +177,7 @@
       position: fixed;
   }
   
-  .form-section-login-recycler {
+  .form-section-login-recycler, .form-section-login-upcycler {
     width: 640px;
     height: 640px;
     top: 50%;
@@ -185,7 +185,7 @@
     transform: translate(-50%, -50%);
   }
 
-  .form-section-login-recycler .form {
+  .form-section-login-recycler .form, .form-section-login-upcycler .form {
     margin: 10px auto 10px auto;
     width: 70%;
   }
@@ -194,7 +194,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 50px;
+    margin-top: 20px;
     height: auto;
   }
   
@@ -217,7 +217,7 @@
       padding: 10px 30px;
   }
   
-  /* Log in upcycler */
+  /* Log in upcycler
   
   .form-section-login-upcycler {
     width: auto;
@@ -234,7 +234,7 @@
     font-weight: 300;
     text-align: center;
     margin-top: 40%;
-  }
+  } */
   }
 
   

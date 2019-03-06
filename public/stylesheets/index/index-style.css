@@ -114,7 +114,7 @@
     display: none;
   }
   
-  .form-section-login-recycler {
+  .form-section-login-recycler, .form-section-login-upcycler {
     width: 100vw;
     height: 100vh;
     position: fixed;
@@ -133,11 +133,11 @@
     color: #fff;
   }
 
-  .form-section-login-recycler .form {
+  .form-section-login-recycler .form, .form-section-login-upcycler .form {
     margin: 0 auto 10px auto;
   }
   
-  .form-section-login-recycler h2 {
+  .form-section-login-recycler h2, .form-section-login-upcycler h2 {
     font-size: 5em;
     color: #fff;
     font-weight: 300;
@@ -145,7 +145,7 @@
     margin-top: 10%;
   }
   
-  .form-section-login-recycler p {
+  .form-section-login-recycler p, .form-section-login-upcycler p {
     font-size: 3em;
     color: #fff;
     text-align: center;
@@ -241,27 +241,6 @@
   
   .submit-btn:hover {
     background-color: rgb(0, 143, 71);
-  }
-  
-  /* Log in upcycler */
-  
-  .form-section-login-upcycler {
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    z-index: 999;
-    top: 0;
-    left: 0;
-    background: url('../../images/1.jpg');
-    background-size: cover;
-  }
-  
-  .form-section-login-upcycler h2 {
-    font-size: 5.5em;
-    color: #fff;
-    font-weight: 300;
-    text-align: center;
-    margin-top: 40%;
   }
   
   /* Jumbo */

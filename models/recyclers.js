@@ -26,13 +26,13 @@ const recyclerSchema = new mongoose.Schema({
   }]
 });
 
-recyclerSchema.methods.generateHash = function(password) {
+recyclerSchema.statics.generateHash = function(password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(saltRounds), null);
 };
 
 // checking if password is valid
-recyclerSchema.methods.validPassword = function(password) {
-  return bcrypt.compareSync(password, this.local.password);
+recyclerSchema.statics.validPassword = function(password) {
+  return bcrypt.compareSync(password, this.locals.password);
 };
 
 const Recycler = mongoose.model('Recycler', recyclerSchema);

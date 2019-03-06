@@ -7,7 +7,7 @@ const upcyclerSchema = new mongoose.Schema({
   firstName: String,
   lastName: String,
   userName: { type: String, required: true },
-  email:    { type: String, required: true },
+  email: String,   
   companyName: String,
   address: {
     street: String,
@@ -27,12 +27,12 @@ const upcyclerSchema = new mongoose.Schema({
   }]
 });
 
-upcyclerSchema.methods.generateHash = function(password) {
+upcyclerSchema.statics.generateHash = function(password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(saltRounds), null);
 };
 
 // checking if password is valid
-upcyclerSchema.methods.validPassword = function(password) {
+upcyclerSchema.statics.validPassword = function(password) {
   return bcrypt.compareSync(password, this.local.password);
 };
 

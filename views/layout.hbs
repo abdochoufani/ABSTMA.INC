@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ABSTMA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/stylesheets/index/index-style.css">
+    <link rel="stylesheet" href="/stylesheets/index/index-media.css">
+    <link rel="stylesheet" href="/stylesheets/profile/upcycler-profile.css">
+    <link rel="stylesheet" href="/stylesheets/about/about.css">
+    <link rel="stylesheet" href="/stylesheets/profile/upcycler-edit.css">
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="/"><img class="logo" src="/images/facebook_cover_photo_1.png" alt="abstma logo"></a>
+        <div class="hamburger-container" id="hamburger" onclick="myFunction(this)">
+          <div class="bar1"></div>
+          <div class="bar2"></div>
+          <div class="bar3"></div>
+        </div>
+        <ul class="nav-ul-menu" id="menu">
+          {{#if user}}
+          <li><a href="/about">About us</a></li>
+          <li><a href="#">Contact us</a></li>
+          <li><a href="/recycler/logout">Log out</a></li>
+          {{else if recycler}}
+          <li><a href="/products">Products</a></li>
+          <li><a href="#">Upcyclers</a></li>
+          <li><a href="#">Contact us</a></li>
+          <li><a href="/upcycler/logout">Log out</a></li>
+          {{else}}
+          <li><a href="/#recycler">Are you a recycler?</a></li>
+          <li><a href="/#upcycler">Are you an upcycler?</a></li>
+          <li><a href="/about">About us</a></li>
+          <li><a href="#">Contact us</a></li>
+          {{/if}}
+        </ul>
+      </nav>
+      <div class="spacer"></div>
+    </header>
+
+    {{{body}}}
+
+    <footer class="footer">
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-square"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-github-square"></i></a>
+      </div>
+    </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="/javascripts/index-script.js"></script>
+  </body>
+</html>

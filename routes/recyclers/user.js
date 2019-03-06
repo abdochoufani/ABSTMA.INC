@@ -1,6 +1,7 @@
 const router=require('express').Router()
 const Product=require("../../models/products")
 const Recycler=require("../../models/recyclers")
+const Upcycler = require('../../models/upcyclers')
 
 
 router.get('/*',(req,res,next)=>{
@@ -15,6 +16,20 @@ router.get('/*',(req,res,next)=>{
        res.render("recycler/profile", {recycler:req.user})
   })
 
+  //
+  router.get('/allUpcyclers', (req, res) =>{
+    Upcycler.find({}).populate('products')
+    .then( upcycler => {
+      debugger
+      res.render('allUpcyclers', {upcycler})
+    })
+    .catch( err => {
+      res.status(404).send('No upcyclers found');
+      console.log(`Error ${err}`);
+    })
+  })
+
+ 
 
 
   router.get("/product/:id", (req, res)=> {

@@ -4,7 +4,7 @@
     font-size: 6em;
   }
 
-  .content {
+  .products-content {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;

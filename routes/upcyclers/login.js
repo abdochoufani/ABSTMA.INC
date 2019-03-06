@@ -11,13 +11,16 @@ router.get('/', (req, res) => {
   });
 });
 
-router.get('/auth/signup', (req, res) => {
+router.get('/signup', (req, res) => {
   res.send('Welcome to the Signup page for Upcyclers');
 });
 
-router.post('/auth/signup', passport.authenticate("upcycler-localSignup"),(req,res)=>{
+router.post('/signup', passport.authenticate("upcycler-localSignup"),(req,res)=>{
   res.redirect("/upcycler/profile")
 })
+
+
+router.get("/login",)
 
 router.post("/login",passport.authenticate("upcycler-localLogin"),(req,res)=>{
   res.redirect("/upcycler")

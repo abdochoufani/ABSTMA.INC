@@ -10,6 +10,10 @@ router.get("/signup",(req,res,next)=>{
     res.send('Welcome to the Signup page for recyclers');
 })
 
+router.post("/signup",passport.authenticate("recycler-localSignup",(req,res)=>{
+    res.redirect("/recycler/profile")
+}))
+
 router.get("/google/login",passport.authenticate('google-re',{scope: ['profile']}))
 
 router.get("/login/google/redirect",passport.authenticate('google-re'),(req,res, next)=>{
@@ -17,13 +21,12 @@ router.get("/login/google/redirect",passport.authenticate('google-re'),(req,res,
 })
 
 
-router.get("/login",passport.authenticate('recycler-localLogin'),(req,res)=>{
+router.get("/login",(req,res)=>{
     res.send('Welcome to the Signup page for recyclers');   
 })
 
 router.post("/login",passport.authenticate("recycler-localLogin"),(req,res)=>{
-
-    res.redirect("/recycler/profile")
+    res.redirect("/recycler/profile",{recycler:req.user})
 })
 
 

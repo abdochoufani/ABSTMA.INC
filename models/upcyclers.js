@@ -15,6 +15,7 @@ const upcyclerSchema = new mongoose.Schema({
     country: String
   },
   imageUrl: String,
+  googleId: String,
   description: String,
   website: String,
   description: String,

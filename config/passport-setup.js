@@ -11,26 +11,41 @@ passport.serializeUser((user,done)=>{
       id: user.id,
       userType: user.userType
   }
+  debugger
   done(null,serializedUser)
 })
 
 
-passport.deserializeUser((user,done)=>{
-  switch(user.userType){
+passport.deserializeUser((serializedUser,done)=>{
+  debugger
+  switch(serializedUser.userType){
     case "recycler":
-      Recycler.findById(id).then((recycler)=>{
+      Recycler.findById(serializedUser.id).then((recycler)=>{
+        debugger
         recycler.userType = "recycler"
         done(null,recycler)
       })
       break
     case "upcyclers":
-    Upcycler.findById(id).then((upcycler)=>{
+    Upcycler.findById(serializedUser.id).then((upcycler)=>{
       upcycler.userType = "upcycler"
       done(null,upcycler)
     })
     break 
   }
 })
+
+
+
+passport.serializeUser((user, done) => {
+    done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+    User.findById(id).then((user) => {
+        done(null, user);
+    });
+});
 
 
 
@@ -65,6 +80,8 @@ passport.use("upcycler-localSignup", new LocalStrategy(
 )
 
 
+/***************************Recycler sign up and login********************************************* */
+
 passport.use("recycler-localSignup", new LocalStrategy(
   function(username,password,done) {
     Recycler.findOne({username: username }, function(err, user){
@@ -77,70 +94,51 @@ passport.use("recycler-localSignup", new LocalStrategy(
         email: req.body.email,
         companyName: req.body.companyName,
       }
-      newRecycler.local.password = newrecycler.generateHash(password)
-      Upcycler.create(newUpcycler, (err) => {
+      Recycler.create(newRecycler, (err) => {
           if (err) {
             console.log(`error occured: ${err}`);
           } else {
-            return done(null, newUpcycler);
+            newRecycler.local.password = newRecycler.generateHash(password)
+            newRecycler.userType = "recycler"
+            return done(null, newRecycler);
           }
         })
-        // .then(()=>{
-        //   console.log("user created", newUpcycler)
-        //   })
       }
     })
   })
 )
 
 
-passport.use("upcycler-localLogin", new LocalStrategy(
-    function(username, password, done) {
-      Upcycler.findOne({ username: username }, function(err, user) {
-        if (err) { return done(err); }
-        if (!user || !user.validPassword(password)) {
-          return done(null, false, { message: 'Incorrect username or password' });
-        } else {
-        user.userType="upcycler"
-        return done(null, user);
-        }
-      });
-    }
-  ));
+passport.use("recycler-localLogin", new LocalStrategy(
+  function(username, password, done) {
+    Upcycler.findOne({ username: username }, function(err, user) {
+      if (err) { return done(err); }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username.' });
+      }
+      if (!user.validPassword(password)) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      user.userType="recycler"
+      return done(null, user);
+    });
+  }
+));
 
 
-
-  passport.use("recycler-localLogin", new LocalStrategy(
-    function(username, password, done) {
-      Upcycler.findOne({ username: username }, function(err, user) {
-        if (err) { return done(err); }
-        if (!user) {
-          return done(null, false, { message: 'Incorrect username.' });
-        }
-        if (!user.validPassword(password)) {
-          return done(null, false, { message: 'Incorrect password.' });
-        }
-        user.userType="recycler"
-        return done(null, user);
-      });
-    }
-  ));
-
-
-
-
-
-passport.use(new GoogleStrategy({
+passport.use("google-re",new GoogleStrategy({
   // options for google strategy
   callbackURL:"/recyclers/login/google/redirect",
   clientID:keys.google.clientID,
   clientSecret:keys.google.clientSecret
 },(accessToken,refreshToken,profile,done)=>{
+      debugger
       Recycler.findOne({googleId:profile.id}).then((recycler)=>{
+        debugger
           if (recycler){
               //user already exists then serilize passsword
               console.log("already exist")
-              newRecycler.userType = "recycler"
+              recycler.userType = "recycler"
               done(null,recycler)
           } else {
               const imageUrl = profile.photos[0].value.replace("?sz=50", "")
@@ -166,9 +164,52 @@ passport.use(new GoogleStrategy({
 
 
 
-passport.use(new GoogleStrategy({
+/***************************Upcycler sign up and login********************************************* */
+
+passport.use("upcycler-localSignup", new LocalStrategy(
+  function(username,password,done) {
+    Recycler.findOne({username: username }, function(err, user){
+      if (err) { return done(err); }
+      if (user) {
+        return done(null, false, {message:'That email is already taken.'});
+    } else {
+      var newUpcycler = {
+        userName: req.body.userName,
+        email: req.body.email,
+        companyName: req.body.companyName,
+      }    
+      Upcycler.create(newUpcycler, (err) => {
+          if (err) {
+            console.log(`error occured: ${err}`);
+          } else {
+            newUpcycler.local.password = newUpcycler.generateHash(password)
+            newUpcycler.userType = "upcycler"
+            return done(null, newUpcycler);
+          }
+        })
+      }
+    })
+  })
+)
+
+passport.use("upcycler-localLogin", new LocalStrategy(
+    function(username, password, done) {
+      Upcycler.findOne({ username: username }, function(err, user) {
+        if (err) { return done(err); }
+        if (!user || !user.validPassword(password)) {
+          return done(null, false, { message: 'Incorrect username or password' });
+        } else {
+        user.userType="upcycler"
+        return done(null, user);
+        }
+      });
+    }
+  ));
+
+
+passport.use("google-up",new GoogleStrategy({
   // options for google strategy
-  callbackURL:"/recyclers/login/google/redirect",
+  callbackURL:"/upcyclers/login/google/redirect",
   clientID:keys.google.clientID,
   clientSecret:keys.google.clientSecret
 },(accessToken,refreshToken,profile,done)=>{

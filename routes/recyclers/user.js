@@ -2,21 +2,17 @@ const router=require('express').Router()
 const Product=require("../../models/products")
 const Recycler=require("../../models/recyclers")
 
-const authCheckRecycler=(req,res,next)=>{
-    if(!req.user || req.user.userType !== "recycler") res.redirect("/") 
-    else next()
-}
 
-router.get('/*',authCheckRecycler,(req,res)=>{
-  res.redirect("/recycler/profile")
+router.get('/*',(req,res,next)=>{
+  debugger
+   if(!req.user || req.user.userType !== "recycler") res.redirect("/") 
+   else next()
 })
 
 
   router.get('/profile',(req,res)=>{
-    Recycler.find(req.user.id).then((err,recycler)=>{
-      if (err) throw err
-      else res.render("/recycler/profile", {recycler})
-    })
+    debugger    
+       res.render("recycler/profile", {recycler:req.user})
   })
 
 

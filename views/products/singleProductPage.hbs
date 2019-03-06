@@ -1,9 +1,25 @@
-<h1>
-    {{product.name}}
-</h1>
+<main class="content">
+    <div class="single-product-container">
+        <div class="single-product-img-div">
+            <img class="single-product-img" src="https://cdn.shopify.com/s/files/1/1563/7945/products/Coconut-lifestyle_No_Logo_grande.jpg?v=1533226008" alt="Product image">
+        </div>
+        <div class="single-product-info-section">
+            <div>
+                <p class="keys">Name of the product</p>
+            </div>
+            <div>
+                <p class="keys">Description:</p>
+                <p>blabla</p>
+            </div>
+            <div>
+                <p class="keys">Price:</p>
+                <p>65413</p>
+            </div>
+        </div>
+    </div>
+</main>
 
-<p>{{product.description}}</p>
-
-{{#if user}}
-<a href="/upcycler/product/{{product.id}}/edit">Edit</a>
-{{/if}}
+{{!-- Apply when the real route with ID will be working --}}
+{{!-- {{#if user}}
+    <a href="/upcycler/product/{{product.id}}/edit">Edit</a>
+{{/if}} --}}

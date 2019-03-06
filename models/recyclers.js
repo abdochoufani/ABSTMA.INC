@@ -9,8 +9,8 @@ const recyclerSchema = new mongoose.Schema({
   lastName: String,
   userName:{ type: String, required: true },
   googleId:String,
-  facebookId:String,
   companyName: String,
+  email: String,
   address: {
     street: {type:String, default:"Not set"},
     city: {type:String,lowercase: true, trim: true , default:"Not set"},

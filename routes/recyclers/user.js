@@ -32,6 +32,12 @@ router.get('/*',(req,res,next)=>{
  
 
 
+  router.get("/logout",(req,res)=>{
+    req.logout();
+		res.redirect('/');
+  })
+
+
   router.get("/product/:id", (req, res)=> {
     if(req.params.id){
         Product.findOne({_id:req.params.id}).populate('upcycler').exec((err, product)=>{

@@ -1,6 +1,6 @@
 const passport=require('passport');
 const GoogleStrategy=require('passport-google-oauth20')
-const LocalStrategy=require('passport-local')
+const LocalStrategy=require('passport-local').Strategy
 const Upcycler=require("../models/upcyclers")
 const Recycler=require("../models/recyclers")
 var keys = require('./keys')
@@ -26,7 +26,7 @@ passport.deserializeUser((serializedUser,done)=>{
         done(null,recycler)
       })
       break
-    case "upcyclers":
+    case "upcycler":
     Upcycler.findById(serializedUser.id).then((upcycler)=>{
       upcycler.userType = "upcycler"
       done(null,upcycler)
@@ -37,68 +37,30 @@ passport.deserializeUser((serializedUser,done)=>{
 
 
 
-passport.serializeUser((user, done) => {
-    done(null, user.id);
-});
-
-passport.deserializeUser((id, done) => {
-    User.findById(id).then((user) => {
-        done(null, user);
-    });
-});
-
-
-
-
-
-passport.use("upcycler-localSignup", new LocalStrategy(
-  function(username,password,done) {
-    Upcycler.findOne({username: username }, function(err, user){
-      if (err) { return done(err); }
-      if (user) {
-        return done(null, false, {message:'That email is already taken.'});
-    } else {
-      var newUpcycler = {
-        userName: req.body.userName,
-        email: req.body.email,
-        companyName: req.body.companyName,
-      }
-      newUpcycler.local.password = newUpcycler.generateHash(password)
-      Upcycler.create(newUpcycler, (err) => {
-          if (err) {
-            console.log(`error occured: ${err}`);
-          } else {
-            res.redirect('/upcycler/profile');
-          }
-        }).then(()=>{
-          console.log("user created", newUpcycler)
-          return done(null, newUpcycler);
-          })
-      }
-    })
-  })
-)
 
 
 /***************************Recycler sign up and login********************************************* */
 
-passport.use("recycler-localSignup", new LocalStrategy(
-  function(username,password,done) {
+passport.use("recycler-local-signup", new LocalStrategy({usernameField: "userName",  passReqToCallback: true},
+  function(req,username,password,done) {
+    debugger
     Recycler.findOne({username: username }, function(err, user){
-      if (err) { return done(err); }
-      if (user) {
-        return done(null, false, {message:'That email is already taken.'});
-    } else {
-      var newRecycler = {
-        userName: req.body.userName,
-        email: req.body.email,
-        companyName: req.body.companyName,
-      }
-      Recycler.create(newRecycler, (err) => {
+      debugger
+      if (err) return done(err)
+      if (user) return done(null, false, {message:'That email is already taken.'})
+      else {
+        var newRecycler = {
+            userName:username,
+            email: req.body.email,
+            companyName: req.body.companyName,
+            password:Recycler.generateHash(password)
+          }
+        Recycler.create(newRecycler, (err, newRecycler) => {
+          debugger
           if (err) {
             console.log(`error occured: ${err}`);
           } else {
-            newRecycler.local.password = newRecycler.generateHash(password)
+            debugger
             newRecycler.userType = "recycler"
             return done(null, newRecycler);
           }
@@ -111,13 +73,10 @@ passport.use("recycler-localSignup", new LocalStrategy(
 
 passport.use("recycler-localLogin", new LocalStrategy(
   function(username, password, done) {
-    Upcycler.findOne({ username: username }, function(err, user) {
+    Upcycler.findOne({ userName: username }, function(err, user) {
       if (err) { return done(err); }
-      if (!user) {
-        return done(null, false, { message: 'Incorrect username.' });
-      }
-      if (!user.validPassword(password)) {
-        return done(null, false, { message: 'Incorrect password.' });
+      if (!user || !user.validPassword(password)) {
+        return done(null, false, { message: 'Incorrect username or password.' });
       }
       user.userType="recycler"
       return done(null, user);
@@ -166,23 +125,23 @@ passport.use("google-re",new GoogleStrategy({
 
 /***************************Upcycler sign up and login********************************************* */
 
-passport.use("upcycler-localSignup", new LocalStrategy(
-  function(username,password,done) {
+passport.use("upcycler-localSignup", new LocalStrategy({usernameField: "userName",  passReqToCallback: true},
+  function(req,username,password,done) {
     Recycler.findOne({username: username }, function(err, user){
-      if (err) { return done(err); }
-      if (user) {
+      if (err)  return done(err); 
+      if (user) 
         return done(null, false, {message:'That email is already taken.'});
-    } else {
+      else {
       var newUpcycler = {
-        userName: req.body.userName,
+        userName: username,
         email: req.body.email,
         companyName: req.body.companyName,
+        password: Upcycler.generateHash(password)
       }    
-      Upcycler.create(newUpcycler, (err) => {
+      Upcycler.create(newUpcycler, (err,newUpcycler) => {
           if (err) {
             console.log(`error occured: ${err}`);
           } else {
-            newUpcycler.local.password = newUpcycler.generateHash(password)
             newUpcycler.userType = "upcycler"
             return done(null, newUpcycler);
           }
@@ -194,7 +153,7 @@ passport.use("upcycler-localSignup", new LocalStrategy(
 
 passport.use("upcycler-localLogin", new LocalStrategy(
     function(username, password, done) {
-      Upcycler.findOne({ username: username }, function(err, user) {
+      Upcycler.findOne({ userName: username }, function(err, user) {
         if (err) { return done(err); }
         if (!user || !user.validPassword(password)) {
           return done(null, false, { message: 'Incorrect username or password' });
@@ -213,15 +172,17 @@ passport.use("google-up",new GoogleStrategy({
   clientID:keys.google.clientID,
   clientSecret:keys.google.clientSecret
 },(accessToken,refreshToken,profile,done)=>{
+  debugger
       Upcycler.findOne({googleId:profile.id}).then((upcycler)=>{
+        debugger
           if (upcycler){
               //user already exists then serilize passsword
               console.log("already exist")
-              // newUpcycler.userType = "upcycler"
+               upcycler.userType = "upcycler"
               done(null,upcycler)
           } else {
               const imageUrl = profile.photos[0].value.replace("?sz=50", "")
-          new Recycler({
+          new Upcycler({
               fullName:profile.displayName,
               firstName:profile.name.givenName,
               lastName:profile.name.familyName,
@@ -230,11 +191,13 @@ passport.use("google-up",new GoogleStrategy({
               imageUrl,
               gender:profile.gender
           }).save().then((newUpcycler)=>{
+            debugger
               console.log("user:" + newUpcycler)
               newUpcycler.userType = "upcycler"
               done(null,newUpcycler)
-          }).catch(()=>{
-              console.log("error")
+          }).catch((error)=>{
+            debugger
+              console.log(error)
           })
       }
   })

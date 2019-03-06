@@ -15,21 +15,24 @@ router.get('/signup', (req, res) => {
   res.send('Welcome to the Signup page for Upcyclers');
 });
 
-router.post('/signup', passport.authenticate("upcycler-localSignup"),(req,res)=>{
+router.post('/signup', passport.authenticate("recycler-localSignup"),(req,res)=>{
   res.redirect("/upcycler/profile")
 })
 
 
-router.get("/login",)
+router.get("/login",(req,res)=>{
+  res.send('Welcome to the Signup page for Upcyclers');
+})
 
 router.post("/login",passport.authenticate("upcycler-localLogin"),(req,res)=>{
   res.redirect("/upcycler")
 })
 
 
-router.get("/google/login",passport.authenticate('google-up',{scope: ['profile']}))
+router.get("/google/login",(req,res,next)=> {debugger;next()}, passport.authenticate('google-up',{scope: ['profile']}))
 
-router.post("/login/google/redirect",passport.authenticate('google-up'),(req,res)=>{
+router.get("/login/google/redirect",passport.authenticate('google-up'),(req,res)=>{
+  debugger
     res.redirect("/upcycler/profile")
 })
 

@@ -5,13 +5,8 @@ var logger = require('morgan');
 var mongoose=require('mongoose');
 var keys = require('./config/keys');
 var indexRouter = require('./routes/index');
-var recyclersLogin=require("./routes/recyclers/login")
-var userRouter = require('./routes/recyclers/user');
-var upcyclersLogin = require('./routes/upcyclers/login');
-var aboutRouter = require('./routes/about');
-var contactRouter = require('./routes/contact');
-var upcyclerRouter = require('./routes/upcyclers/user');
-var productRouter = require('./routes/products');
+
+
 var passport=require("passport")
 var session = require('express-session')
  require('./config/passport-setup')
@@ -23,7 +18,13 @@ mongoose.connect('mongodb://localhost/abstma', {useNewUrlParser: true})
 .catch(err => console.log(`An error was encountered, details: ${err}`));
 
 var app = express();
-
+var recyclersLogin=require("./routes/recyclers/login")
+var userRouter = require('./routes/recyclers/user');
+var upcyclersLogin = require('./routes/upcyclers/login');
+var aboutRouter = require('./routes/about');
+var contactRouter = require('./routes/contact');
+var upcyclerRouter = require('./routes/upcyclers/user');
+var productRouter = require('./routes/products');
 
 
 // view engine setup

@@ -2,7 +2,7 @@
 function myFunction(x) {
     x.classList.toggle("change");
     document.getElementById("menu").classList.toggle("show");
-    document.getElementsByClassName("jumbo-section")[0].classList.toggle("spacedown");
+    document.getElementById("spacer").classList.toggle("spacedown");
   }
 
 // Buttons for sign in and log in

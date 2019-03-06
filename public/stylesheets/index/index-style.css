@@ -83,6 +83,7 @@
   
   .spacedown {
     margin-top: 190px;
+    height: 200px;
   }
   
   .nav-ul-menu li {
@@ -121,7 +122,7 @@
     z-index: 999;
     top: 0;
     left: 0;
-    background: url('../../images/1.jpg');
+    background: url('../../images/2.jpg');
     background-size: cover;
   }
   
@@ -195,7 +196,7 @@
     z-index: 999;
     top: 0;
     left: 0;
-    background: url('../../images/1.jpg');
+    background: url('../../images/2.jpg');
     background-size: cover;
   }
   

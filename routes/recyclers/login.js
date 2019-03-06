@@ -10,8 +10,9 @@ router.get("/signup",(req,res,next)=>{
     res.send('Welcome to the Signup page for recyclers');
 })
 
-router.post("/signup",passport.authenticate("recycler-localSignup",(req,res)=>{
-    res.redirect("/recycler/profile")
+router.post("/signup",(req,res,next)=> {debugger;next()},passport.authenticate("recycler-local-signup", {
+    successRedirect : '/recycler/profile', // redirect to the secure profile section
+    failureRedirect : '/' // redirect back to the signup page if there is an error
 }))
 
 router.get("/google/login",passport.authenticate('google-re',{scope: ['profile']}))

@@ -71,15 +71,19 @@ passport.use("recycler-local-signup", new LocalStrategy({usernameField: "userNam
 )
 
 
-passport.use("recycler-localLogin", new LocalStrategy(
+passport.use("recycler-localLogin", new LocalStrategy({usernameField: "userName"},
   function(username, password, done) {
-    Upcycler.findOne({ userName: username }, function(err, user) {
-      if (err) { return done(err); }
-      if (!user || !user.validPassword(password)) {
-        return done(null, false, { message: 'Incorrect username or password.' });
-      }
-      user.userType="recycler"
-      return done(null, user);
+    debugger
+    Recycler.findOne({ userName: username }, function(err,recycler) {
+      debugger
+      if (err) { return done(err)}
+      if (!recycler) {return done(null,false)};
+       if(!recycler.validPassword(password)){
+         return done(null, false)
+       }
+        debugger
+        recycler.userType="recycler"
+        return done(null, recycler);
     });
   }
 ));
@@ -151,7 +155,7 @@ passport.use("upcycler-localSignup", new LocalStrategy({usernameField: "userName
   })
 )
 
-passport.use("upcycler-localLogin", new LocalStrategy(
+passport.use("upcycler-localLogin", new LocalStrategy({usernameField: "userName"},
     function(username, password, done) {
       Upcycler.findOne({ userName: username }, function(err, user) {
         if (err) { return done(err); }

@@ -1,7 +1,6 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
-var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose=require('mongoose');
 var keys = require('./config/keys');
@@ -15,7 +14,7 @@ var upcyclerRouter = require('./routes/upcyclers/user');
 var productRouter = require('./routes/products');
 var passport=require("passport")
 var session = require('express-session')
-var passportSetup = require('./config/passport-setup')
+ require('./config/passport-setup')
 
 
 mongoose.connect('mongodb://localhost/abstma', {useNewUrlParser: true})
@@ -36,9 +35,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(session({
   secret: keys.session.cookieKey,
-  resave: false,
+  resave: true,
   saveUninitialized: true,
-  cookie: { secure: true }
 }))
 
 
@@ -49,8 +47,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use('/', indexRouter);
-app.use('/recycler', userRouter);
-app.use('/recyclers',recyclersLogin)
+app.use('/recycler', require('./routes/recyclers/user'));
+app.use('/recyclers',require("./routes/recyclers/login"))
 app.use('/upcyclers', upcyclersLogin);
 app.use('/upcycler', upcyclerRouter);
 app.use('/about', aboutRouter);

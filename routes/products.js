@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 
 
 
-//GET Route to /product
+
 router.get('/',(req, res)=>{
   Product.find({}).populate('upcycler')
   .then( product => {
@@ -24,7 +24,7 @@ router.get('/',(req, res)=>{
 // /products
 router.post('/', (req,res)=>{
   const {name,imageUrl, description,weight,size}=req.body;
-  var upcycler = mongoose.Types.ObjectId(req.body.upcycler);
+  var upcycler = mongoose.Types.ObjectId(req.user.id);
   const newProduct= new Product({
       name,
       description,

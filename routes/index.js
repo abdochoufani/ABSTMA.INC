@@ -1,8 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose=require("mongoose")
-var passport=require("passport")
-var passportSetup = require('../config/passport-setup')
+
 
 
 
@@ -16,12 +15,5 @@ router.get('/', function(req, res, next) {
 router.get('/chat',(req,res)=>{
     res.render('chat/chatForm')
 })
-
-
-
-
-
-
-
 
 module.exports = router;

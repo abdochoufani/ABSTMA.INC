@@ -15,22 +15,18 @@ router.get('/*',(req,res,next)=>{
 
 
 
-router.get("/logout",(req,res)=>{
-  req.session.destroy()
-  req.logout();
-  res.redirect('/');
-})
-
 router.get('/profile', (req, res) =>{
     res.render('upcycler/profile', {user:req.user});
     });
 
 
 router.get('/createItem',(req,res)=>{
-   res.render('Products/createProduct', {user:req.user});
+   res.render('products/createProduct', {user:req.user});
 })
 
 router.post("/product/:id",(req,res)=>{
+  debugger
+  var upcycler = mongoose.Types.ObjectId(req.user);
   const {name,imageUrl, description,weight,size}=req.body
   const update={
     name,
@@ -38,7 +34,7 @@ router.post("/product/:id",(req,res)=>{
      description,
      weight,
      size,
-     upcycler:req.user._id
+     upcycler
   }
   Product.findByIdAndUpdate(req.params.id, update, (err) => {
       if (err){ return next(err); }
@@ -91,4 +87,9 @@ router.get("/product/:id/edit",(req,res)=>{
   })
 })
 
+
+router.get("/logout",(req,res)=>{
+  req.session.destroy()
+  res.redirect('/');
+})
 module.exports = router;

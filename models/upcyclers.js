@@ -32,7 +32,7 @@ upcyclerSchema.statics.generateHash = function(password) {
 };
 
 // checking if password is valid
-upcyclerSchema.statics.validPassword = function(password) {
+upcyclerSchema.methods.validPassword = function(password) {
   return bcrypt.compareSync(password, this.local.password);
 };
 

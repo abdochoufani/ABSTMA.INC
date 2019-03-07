@@ -11,6 +11,7 @@ const recyclerSchema = new mongoose.Schema({
   googleId:String,
   companyName: String,
   email: String,
+  password:String,
   address: {
     street: {type:String, default:"Not set"},
     city: {type:String,lowercase: true, trim: true , default:"Not set"},
@@ -32,7 +33,7 @@ recyclerSchema.statics.generateHash = function(password) {
 
 // checking if password is valid
 recyclerSchema.statics.validPassword = function(password) {
-  return bcrypt.compareSync(password, this.locals.password);
+  return bcrypt.compareSync(password, this.password);
 };
 
 const Recycler = mongoose.model('Recycler', recyclerSchema);

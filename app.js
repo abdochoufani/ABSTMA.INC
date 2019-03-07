@@ -5,8 +5,6 @@ var logger = require('morgan');
 var mongoose=require('mongoose');
 var keys = require('./config/keys');
 var indexRouter = require('./routes/index');
-
-
 var passport=require("passport")
 var session = require('express-session')
  require('./config/passport-setup')
@@ -40,6 +38,15 @@ app.use(session({
   saveUninitialized: true,
 }))
 
+
+
+app.use((req,res,next)=>{
+  if(req.session.user){
+    if(req.user.userType =="recycler") res.locals.recycler = req.session.user
+    else if(req.user.userType=="upcycler") res.locals.user=req.session.user
+  }
+  next()
+})
 
 app.use(express.static(path.join(__dirname, 'public')));
 

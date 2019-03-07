@@ -20,9 +20,9 @@ router.get('/*',(req,res,next)=>{
 // Route --> /recycler/allUpcyclers                           //
   router.get('/allUpcyclers', (req, res) =>{                  // 
     Upcycler.find({}).populate('products')                    //
-    .then( upcycler => {                                      //
+    .then( upcyclers => {                                      //
       debugger                                                // 
-      res.render('allUpcyclers', {upcycler})                  //
+      res.render('allUpcyclers', {upcyclers})                  //
     })                                                        //
     .catch( err => {                                          //
       res.status(404).send('No upcyclers found');             //

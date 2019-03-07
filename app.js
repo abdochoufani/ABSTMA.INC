@@ -28,7 +28,6 @@ var productRouter = require('./routes/products');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -41,17 +40,16 @@ app.use(session({
 
 
 app.use((req,res,next)=>{
-  if(req.session.user){
-    if(req.user.userType =="recycler") res.locals.recycler = req.session.user
-    else if(req.user.userType=="upcycler") res.locals.user=req.session.user
+  debugger
+  if(req.session.passport){
+    if(req.session.passport.user.userType =="recycler") res.locals.recycler = req.session.id
+    else if(req.session.passport.user.userType=="upcycler") res.locals.user = req.session.id
   }
   next()
 })
 
+
 app.use(express.static(path.join(__dirname, 'public')));
-
-
-
 app.use(passport.initialize());
 app.use(passport.session());
 app.use('/', indexRouter);

@@ -3,7 +3,7 @@ var router = express.Router();
 
 //GET Route for  => www.abstmo.com/contact
 router.get('/', (req, res) => {
-  res.send('Welcome the Contact US page');
+  res.render('home/contact');
 });
 
 module.exports = router;

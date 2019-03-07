@@ -1,0 +1,22 @@
+.upcycler-products-container {
+    height: 100%;
+}
+
+.upcycler-product-h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.upcycler-products-container .product-description {
+    text-align: center;
+}
+
+@media (min-width: 1024px) {
+    .upcycler-products-container {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+}

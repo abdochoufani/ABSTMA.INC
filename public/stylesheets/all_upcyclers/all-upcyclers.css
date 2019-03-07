@@ -8,7 +8,6 @@
 }
 
 .all-upcyclers-h1 {
-    display: block;
     margin: 20px;
     font-size: 3.5em;
 }
@@ -24,7 +23,17 @@
 }
 
 .upcycler-profile-div p {
-  margin: 20px 0 10px 0;
+  margin: 20px 0 0px 0;
+}
+
+.upcycler-profile-div button {
+    margin-bottom: 10px;
+    font-size: 1.3em;
+    width: auto;
+}
+
+.upcycler-profile-div button a {
+    color: #fff;
 }
 
 .upcycler-profile-img-div {

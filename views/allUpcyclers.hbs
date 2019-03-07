@@ -5,18 +5,13 @@
     <div class="upcycler-profile-div">
         <div class="upcycler-profile-img-div">
           {{#if imageUrl }}
-          <a href="#"><img class="profile-img" src="{{ imageUrl }}" alt="Upcycler profile photo"></a>
+          <img class="profile-img" src="{{ imageUrl }}" alt="Upcycler profile photo">
           {{else}}
-          <a href="#"><img class="profile-img" src="/images/profile-placeholder.png" alt="Upcycler profile photo"></a>
+          <img class="profile-img" src="/images/profile-placeholder.png" alt="Upcycler profile photo">
           {{/if}}
         </div>
         <p class="product-title">{{userName}}</p>
-
-          <h4>
-            <a href="/recycler/product?UpcyclerId={{_id}}">found its products</a>
-          </h4>
-
-
+        <button class="submit-btn"><a href="/recycler/product?UpcyclerId={{id}}">See all products</a> </button>
     </div>
 
     {{/each}}

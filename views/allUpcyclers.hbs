@@ -1,10 +1,22 @@
-<h1>test page found</h1>
+<main class="content">
+  <h1 class="all-upcyclers-h1">People that are changing the world</h1>
+  <div class="all-upcyclers-container">
+    {{#each upcycler}}
+    <div class="upcycler-profile-div">
+        <div class="upcycler-profile-img-div">
+          {{#if imageUrl }}
+          <a href="#"><img class="profile-img" src="{{ imageUrl }}" alt="Upcycler profile photo"></a>
+          {{else}}
+          <a href="#"><img class="profile-img" src="/images/profile-placeholder.png" alt="Upcycler profile photo"></a>
+          {{/if}}
+        </div>
+        <p class="product-title">{{userName}}</p>
+    </div>
 
-{{#each upcycler}}
+    {{/each}}
+  </div>
+</main>
 
-<h3>{{userName}}</h3>
-<h4>
+{{!-- <h4>
   <a href="/recycler/product?UpcyclerId={{upcycler._id}}">found its products</a>
-</h4>
-
-{{/each}}
+</h4> --}}

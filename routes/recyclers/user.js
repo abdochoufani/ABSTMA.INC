@@ -2,7 +2,7 @@ const router=require('express').Router()
 const Product=require("../../models/products")
 const Recycler=require("../../models/recyclers")
 const Upcycler = require('../../models/upcyclers')
-
+const mongoose = require('mongoose');
 
 router.get('/*',(req,res,next)=>{
   debugger
@@ -30,6 +30,19 @@ router.get('/*',(req,res,next)=>{
     })                                                        //
   })                                                          //
 //============================================================
+
+
+=======
+//Route  --> /recycler/product
+router.get('/product', (req, res) => {
+  let id = req.query.UpcyclerId
+  Product.find({upcycler: mongoose.Types.ObjectId(id)}, (err, product)=>{
+    debugger
+    res.status(200).render('upcyclerProducts', {product})
+  })
+})
+ 
+
 
 
 
@@ -60,12 +73,5 @@ router.get('/*',(req,res,next)=>{
 
 
 
+  module.exports = router
 
-
-// router.get("/logout",(req,res)=>{
-//   req.logOut()
-//   req.session =null
-//   res.redirect('/');
-// })
-
-  module.exports=router

@@ -21,7 +21,7 @@ router.get('/',(req, res)=>{
 
 
 
-
+// /products
 router.post('/', (req,res)=>{
   const {name,imageUrl, description,weight,size}=req.body;
   var upcycler = mongoose.Types.ObjectId(req.body.upcycler);

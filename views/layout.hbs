@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="/stylesheets/products/products-style.css">
     <link rel="stylesheet" href="/stylesheets/products/products-media.css">
     <link rel="stylesheet" href="/stylesheets/singleproduct.css">
+    <link rel="stylesheet" href="/stylesheets/create-product.css">
   </head>
   <body>
     <header>
@@ -32,7 +33,12 @@
           <li><a href="#">Contact us</a></li>
           <li><a href="/recycler/logout">Log out</a></li>
           {{else if recycler}}
-          <li><a href="/products">Products</a></li>
+          <li><a href="/recycler/products">Products</a></li>
+          <li><a href="/recycler/allUpcyclers">Upcyclers</a></li>
+          <li><a href="#">Contact us</a></li>
+          <li><a href="/upcycler/logout">Log out</a></li>
+          {{else if product}}
+          <li><a href="/recycler/products">Products</a></li>
           <li><a href="/recycler/allUpcyclers">Upcyclers</a></li>
           <li><a href="#">Contact us</a></li>
           <li><a href="/upcycler/logout">Log out</a></li>

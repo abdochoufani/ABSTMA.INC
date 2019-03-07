@@ -44,6 +44,37 @@ router.get('/product', (req, res) => {                                      //
 //============================================================================
 
 
+// Route --> /recycler/edit/:id===============================================
+router.get('/edit/:id', (req, res) =>{
+  Recycler.findById(req.params.id, (err, recycler) => {
+    if (err) console.log(`Error occured: ${err}`)
+    else {
+      res.render('editRecycler', {recycler: recycler})
+    }
+  })
+})
+
+router.post('/edit/:id', (req, res) =>{
+  let edited = {
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    userName: req.body.userName,
+    companyName: req.body.companyName,
+    email: req.body.email, 
+    country: req.body.country,
+    city: req.body.city, 
+    street: req.body.street,
+    imageUrl: req.body.imageUrl,
+    description: req.body.description
+  }
+  Recycler.findByIdAndUpdate(req.params.id, edited, (err) => {
+    if (err){ return next(err); }
+    res.redirect('/recycler/profile')
+  })
+})
+//=======================================================================
+
+
   router.get("/logout",(req,res)=>{
     req.session.destroy();
     req.logout();

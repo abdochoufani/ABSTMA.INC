@@ -99,8 +99,12 @@
         aspernatur vel, sequi et perspiciatis recusandae placeat soluta corporis, natus quas illum voluptatum!
         Voluptate, nam officia.</p>
       <div class="buttons-div">
+        {{#if recycler}}
+        <button onclick="window.location.href='/recycler/profile'">Continue to your profile</button>
+        {{else}}
         <button id="signup-recycler">Sign up</button>
         <button id="login-recycler">Log in</button>
+        {{/if}}
       </div>
     </div>
   </section>
@@ -118,8 +122,12 @@
         aspernatur vel, sequi et perspiciatis recusandae placeat soluta corporis, natus quas illum voluptatum!
         Voluptate, nam officia.</p>
       <div class="buttons-div">
+        {{#if upcycler}}
+        <button onclick="window.location.href='/upcycler/profile'">Continue to your profile</button>
+        {{else}}
         <button id="signup-upcycler">Sign up</button>
         <button id="login-upcycler">Log in</button>
+        {{/if}}
       </div>
     </div>
   </section>

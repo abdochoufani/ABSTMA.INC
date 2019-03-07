@@ -1,6 +1,7 @@
 <main class="content">
-    <div class="upcycler-products-container">
         {{#if product}}
+            <h1>List of products</h1>
+            <div class="upcycler-products-container">
             {{#each product}}
                 <div class="main-container">
                 <div class="product-container">
@@ -16,10 +17,10 @@
                 </div>
             </div>
             {{/each}}
+            </div>
         {{else}}
-        <div class="upcycler-product-h1">
-            <h1>This upcycler has no products to display yet</h1>
-        </div>
+            <div class="upcycler-product-h1">
+                <h1>This upcycler has no products to display yet</h1>
+            </div>
         {{/if}}
-    </div>
 </main>

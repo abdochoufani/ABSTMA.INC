@@ -17,4 +17,13 @@ router.get('/chat',(req,res)=>{
     res.render('chat/chatForm')
 })
 
+
+
+
+router.get("/logout",(req,res)=>{
+  req.session.destroy(function (err) {
+    res.redirect('/'); //Inside a callback… bulletproof!
+  });
+})
+
 module.exports = router;

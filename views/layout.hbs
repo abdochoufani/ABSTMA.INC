@@ -29,20 +29,20 @@
           <div class="bar3"></div>
         </div>
         <ul class="nav-ul-menu" id="menu">
-          {{#if user}}
-          <li><a href="/upcycler/profile">Profile</a></li>
+          {{#if upcycler}}
+          <li><a href="/about">About us</a></li>
           <li><a href="#">Contact us</a></li>
-          <li><a href="/upcycler/logout">Log out</a></li>
+          <li><a href="/logout">Log out</a></li>
           {{else if recycler}}
           <li><a href="/recycler/products">Products</a></li>
           <li><a href="/recycler/allUpcyclers">Upcyclers</a></li>
           <li><a href="#">Contact us</a></li>
-          <li><a href="/upcycler/logout">Log out</a></li>
-          {{else if product}}
+          <li><a href="/logout">Log out</a></li>
+          {{!-- {{else if product}}
           <li><a href="/recycler/products">Products</a></li>
           <li><a href="/recycler/allUpcyclers">Upcyclers</a></li>
           <li><a href="#">Contact us</a></li>
-          <li><a href="/recycler/logout">Log out</a></li>
+          <li><a href="/recycler/logout">Log out</a></li> --}}
           {{else}}
           <li><a href="/#recycler">Are you a recycler?</a></li>
           <li><a href="/#upcycler">Are you an upcycler?</a></li>

@@ -31,6 +31,8 @@ router.get('/*',(req,res,next)=>{
   })                                                          //
 //============================================================
 
+
+=======
 //Route  --> /recycler/product
 router.get('/product', (req, res) => {
   let id = req.query.UpcyclerId
@@ -42,11 +44,6 @@ router.get('/product', (req, res) => {
  
 
 
-  router.get("/logout",(req,res)=>{
-    req.session.destroy();
-    req.logout();
-		res.redirect('/');
-  })
 
 
   router.get("/product/:id", (req, res)=> {
@@ -74,4 +71,7 @@ router.get('/product', (req, res) => {
     })
   });
 
+
+
   module.exports = router
+

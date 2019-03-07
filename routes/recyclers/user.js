@@ -32,14 +32,16 @@ router.get('/*',(req,res,next)=>{
 //============================================================
 
 //Route  --> /recycler/product
-router.get('/product', (req, res) => {
-  let id = req.query.UpcyclerId
-  Product.find({upcycler: mongoose.Types.ObjectId(id)}, (err, product)=>{
-    debugger
-    res.status(200).render('upcyclerProducts', {product})
-  })
-})
- 
+//===========================================================================
+router.get('/product', (req, res) => {                                      //
+  let id = req.query.UpcyclerId                                             //
+  Product.find({upcycler: mongoose.Types.ObjectId(id)}, (err, product)=>{   //
+    debugger                                                                //
+    if (err) console.log(`Error occurred: ${err}`)                          //
+    res.status(200).render('upcyclerProducts', {product})                   //
+  })                                                                        //
+})                                                                          //
+//============================================================================
 
 
   router.get("/logout",(req,res)=>{

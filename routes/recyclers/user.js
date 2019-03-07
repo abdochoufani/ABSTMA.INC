@@ -20,9 +20,9 @@ router.get('/*',(req,res,next)=>{
 // Route --> /recycler/allUpcyclers                           //
   router.get('/allUpcyclers', (req, res) =>{                  // 
     Upcycler.find({}).populate('products')                    //
-    .then( upcycler => {                                      //
+    .then( upcyclers => {                                      //
       debugger                                                // 
-      res.render('allUpcyclers', {upcycler})                  //
+      res.render('allUpcyclers', {upcyclers})                  //
     })                                                        //
     .catch( err => {                                          //
       res.status(404).send('No upcyclers found');             //
@@ -30,6 +30,8 @@ router.get('/*',(req,res,next)=>{
     })                                                        //
   })                                                          //
 //============================================================
+
+
 
 //Route  --> /recycler/product
 //===========================================================================
@@ -44,11 +46,6 @@ router.get('/product', (req, res) => {                                      //
 //============================================================================
 
 
-  router.get("/logout",(req,res)=>{
-    req.session.destroy();
-    req.logout();
-		res.redirect('/');
-  })
 
 
   router.get("/product/:id", (req, res)=> {
@@ -76,4 +73,7 @@ router.get('/product', (req, res) => {                                      //
     })
   });
 
+
+
   module.exports = router
+

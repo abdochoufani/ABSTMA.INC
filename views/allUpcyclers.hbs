@@ -1,7 +1,7 @@
 <main class="content">
   <h1 class="all-upcyclers-h1">People that are changing the world</h1>
   <div class="all-upcyclers-container">
-    {{#each upcycler}}
+    {{#each upcyclers}}
     <div class="upcycler-profile-div">
         <div class="upcycler-profile-img-div">
           {{#if imageUrl }}
@@ -11,9 +11,12 @@
           {{/if}}
         </div>
         <p class="product-title">{{userName}}</p>
+
           <h4>
             <a href="/recycler/product?UpcyclerId={{_id}}">found its products</a>
           </h4>
+
+
     </div>
 
     {{/each}}

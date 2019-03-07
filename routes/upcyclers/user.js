@@ -16,6 +16,7 @@ router.get('/*',(req,res,next)=>{
 
 
 router.get("/logout",(req,res)=>{
+  req.session.destroy()
   req.logout();
   res.redirect('/');
 })
@@ -45,7 +46,33 @@ router.post("/product/:id",(req,res)=>{
     });
 })
 
+// Route --> /upcycler/edit/:id
+router.get('/edit/:id', (req, res) =>{
+  Upcycler.findById(req.params.id, (err, upcycler) => {
+    if (err) console.log(`Error occured: ${err}`)
+    else {
+      res.render('editUpcycler', {user: upcycler})
+    }
+  })
+})
 
+router.post('/edit/:id', (req, res) =>{
+  let edited = {
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    userName: req.body.userName,
+    email: req.body.email, 
+    country: req.body.country,
+    city: req.body.city, 
+    street: req.body.street,
+    imageUrl: req.body.imageUrl,
+    description: req.body.description
+  }
+  Upcycler.findByIdAndUpdate(req.params.id, edited, (err) => {
+    if (err){ return next(err); }
+    res.redirect('/upcycler/profile')
+  })
+})
 
 router.post("/product/:id/delete",(req,res)=>{
   Product.findByIdAndDelete(req.params.id, (err)=>{
@@ -64,10 +91,13 @@ router.get("/product/:id/edit",(req,res)=>{
   })
 })
 
+<<<<<<< HEAD
 router.get('/logout',(req,res)=>{
   req.session.destroy()
   req.logOut()
   res.redirect('/')
 })
 
+=======
+>>>>>>> 56a277932931bff06e088f466aac6a035cea2097
 module.exports = router;

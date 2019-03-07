@@ -1,15 +1,19 @@
 <main class="content">
     <div class="single-product-container">
         <div class="single-product-img-div">
+            {{#if product.imageUrl}}
+            <img class="single-product-img" src="{{ product.imageUrl }}" alt="Product image">
+            {{else}}
             <img class="single-product-img" src="https://cdn.shopify.com/s/files/1/1563/7945/products/Coconut-lifestyle_No_Logo_grande.jpg?v=1533226008" alt="Product image">
+            {{/if}}
         </div>
         <div class="single-product-info-section">
             <div>
-                <p class="keys">Name of the product</p>
+                <p class="keys">{{ product.name }}</p>
             </div>
             <div>
                 <p class="keys">Description:</p>
-                <p>blabla</p>
+                <p>{{ product.description }}</p>
             </div>
             <div>
                 <p class="keys">Price:</p>

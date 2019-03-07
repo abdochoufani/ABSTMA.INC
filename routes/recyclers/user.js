@@ -1,6 +1,7 @@
 const router=require('express').Router()
 const Product=require("../../models/products")
 const Recycler=require("../../models/recyclers")
+const Upcycler = require('../../models/upcyclers')
 
 
 router.get('/*',(req,res,next)=>{
@@ -15,10 +16,31 @@ router.get('/*',(req,res,next)=>{
        res.render("recycler/profile", {recycler:req.user})
   })
 
+//Route to display all Upcyclers==============================//
+// Route --> /recycler/allUpcyclers                           //
+  router.get('/allUpcyclers', (req, res) =>{                  // 
+    Upcycler.find({}).populate('products')                    //
+    .then( upcycler => {                                      //
+      debugger                                                // 
+      res.render('allUpcyclers', {upcycler})                  //
+    })                                                        //
+    .catch( err => {                                          //
+      res.status(404).send('No upcyclers found');             //
+      console.log(`Error ${err}`);                            //
+    })                                                        //
+  })                                                          //
+//============================================================//
+
+
+ 
 
 
   router.get("/logout",(req,res)=>{
+<<<<<<< HEAD
     req.session.destroy()
+=======
+    req.session.destroy();
+>>>>>>> 56a277932931bff06e088f466aac6a035cea2097
     req.logout();
 		res.redirect('/');
   })

@@ -5,7 +5,11 @@
     <div class="main-container">
         <div class="product-container">
             <div class="product-image-container">
+                {{#if imageUrl}}
+                <img src="{{ imageUrl }}" alt="product-image">
+                {{else}}
                 <img src="http://productimages.brambleberry.com/2014_Product/Fragrance_Flavor_Ess/GreenTeaCucumber_FO238_Main_A.jpg" alt="product-image">
+                {{/if}}
             </div>
             <h2 class="product-title"><a class="hover-shadow-box-animation" href="/products/product/{{this.id}}">{{this.name}}</a></h2>
             <h3>Produced by: {{this.upcycler.userName}}</h3>

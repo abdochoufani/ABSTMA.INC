@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
     <link rel="stylesheet" href="/stylesheets/index/index-style.css">
     <link rel="stylesheet" href="/stylesheets/index/index-media.css">
     <link rel="stylesheet" href="/stylesheets/profile/upcycler-profile.css">
@@ -17,6 +16,7 @@
     <link rel="stylesheet" href="/stylesheets/products/products-style.css">
     <link rel="stylesheet" href="/stylesheets/products/products-media.css">
     <link rel="stylesheet" href="/stylesheets/singleproduct.css">
+    <link rel="stylesheet" href="/stylesheets/create-product.css">
   </head>
   <body>
     <header>
@@ -34,7 +34,16 @@
           <li><a href="/upcycler/logout">Log out</a></li>
           {{else if recycler}}
           <li><a href="/recycler/products">Products</a></li>
+<<<<<<< HEAD
           <li><a href="#">Upcyclers</a></li>
+=======
+          <li><a href="/recycler/allUpcyclers">Upcyclers</a></li>
+          <li><a href="#">Contact us</a></li>
+          <li><a href="/upcycler/logout">Log out</a></li>
+          {{else if product}}
+          <li><a href="/recycler/products">Products</a></li>
+          <li><a href="/recycler/allUpcyclers">Upcyclers</a></li>
+>>>>>>> 56a277932931bff06e088f466aac6a035cea2097
           <li><a href="#">Contact us</a></li>
           <li><a href="/recycler/logout">Log out</a></li>
           {{else}}

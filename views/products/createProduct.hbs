@@ -1,7 +1,17 @@
 <main class="content">
     <div class="create-product-container">
-        <form method="POST" action="/products">
-            
+        <form class="create-product-form" method="POST" action="/products">
+            <label for="">Name of the product:</label>
+            <input class="input-edit" type="text" name="name">
+            <label for="">Image url:</label>
+            <input class="input-edit" type="text" name="imageUrl" id="">
+            <label for="">Weight:</label>
+            <input class="input-edit" ype="text" name="weight">
+            <label for="">Size:</label>
+            <input class="input-edit" ype="text" name="size">
+            <label for="">Description:</label>
+            <textarea name="description" id="" cols="30" rows="10"></textarea>
+            <input class="submit-btn" type="submit">
         </form>
     </div>
 </main>

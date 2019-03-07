@@ -32,15 +32,6 @@ router.get('/*',(req,res,next)=>{
 //============================================================
 
 
- 
-
-
-  router.get("/logout",(req,res)=>{
-    req.session.destroy();
-    req.logout();
-		res.redirect('/');
-  })
-
 
   router.get("/product/:id", (req, res)=> {
     if(req.params.id){
@@ -66,5 +57,15 @@ router.get('/*',(req,res,next)=>{
       console.log(`Error occured: ${err}`)
     })
   });
+
+
+
+
+
+// router.get("/logout",(req,res)=>{
+//   req.logOut()
+//   req.session =null
+//   res.redirect('/');
+// })
 
   module.exports=router

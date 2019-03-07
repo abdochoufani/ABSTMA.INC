@@ -8,23 +8,23 @@ const mongoose = require('mongoose');
 
 
 
-// GET Route to /product
-// router.get('/',(req, res)=>{
-//   Product.find({}).populate('upcycler')
-//   .then( product => {
-//     res.render('products/product.hbs', {product: product})
-//   }).catch(err =>{
-//     res.status(404).send('No products availabe');
-//     console.log(`Error occured: ${err}`);
-//   })
-// });
+
+router.get('/',(req, res)=>{
+  Product.find({}).populate('upcycler')
+  .then( product => {
+    res.render('products/product.hbs', {product: product})
+  }).catch(err =>{
+    res.status(404).send('No products availabe');
+    console.log(`Error occured: ${err}`);
+  })
+});
 
 
 
 // /products
 router.post('/', (req,res)=>{
   const {name,imageUrl, description,weight,size}=req.body;
-  var upcycler = mongoose.Types.ObjectId(req.body.upcycler);
+  var upcycler = mongoose.Types.ObjectId(req.user.id);
   const newProduct= new Product({
       name,
       description,

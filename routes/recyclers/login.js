@@ -40,7 +40,7 @@ router.get("/login",loggedOutRecycler,(req,res)=>{
 })
 
 router.post("/login",(req,res,next)=> {debugger;next()},passport.authenticate("recycler-localLogin"),(req,res)=>{
-    res.redirect("/recycler/profile",{recycler:req.user})
+    res.redirect("/recycler/profile", {recycler:req.user})
 })
 
 

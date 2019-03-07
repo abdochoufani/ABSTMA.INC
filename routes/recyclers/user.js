@@ -29,18 +29,14 @@ router.get('/*',(req,res,next)=>{
       console.log(`Error ${err}`);                            //
     })                                                        //
   })                                                          //
-//============================================================//
+//============================================================
 
 
  
 
 
   router.get("/logout",(req,res)=>{
-<<<<<<< HEAD
-    req.session.destroy()
-=======
     req.session.destroy();
->>>>>>> 56a277932931bff06e088f466aac6a035cea2097
     req.logout();
 		res.redirect('/');
   })

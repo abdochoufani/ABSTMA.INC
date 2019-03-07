@@ -17,7 +17,7 @@
         </div>
     </div>
 
-    {{#if user}}
+    {{#if req.user}}
     <a href="/upcycler/product/{{this.id}}/edit">Edit</a>
     <a href="/upcycler/product/{{this.id}}/delete">Delete</a>
     {{/if}}

@@ -162,15 +162,15 @@ passport.use("upcycler-localLogin", new LocalStrategy({usernameField: "userName"
     function(username, password, done) {
       Upcycler.findOne({ userName: username }, function(err, user) {
         if (err) { return done(err); }
-        if (!user || !user.validPassword(password)) {
-          return done(null, false, { message: 'Incorrect username or password' });
-        } else {
-        user.userType="upcycler"
-        return done(null, user);
+        if (!user) {return done(null,false)};
+        if(!bcrypt.compareSync(password, user.password)){
+          return done(null,false)
         }
+         debugger
+         user.userType="upcycler"
+         return done(null, user);
       });
-    }
-  ));
+    }));
 
 
 passport.use("google-up",new GoogleStrategy({

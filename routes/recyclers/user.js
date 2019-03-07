@@ -32,7 +32,6 @@ router.get('/*',(req,res,next)=>{
 //============================================================
 
 
-=======
 //Route  --> /recycler/product
 router.get('/product', (req, res) => {
   let id = req.query.UpcyclerId

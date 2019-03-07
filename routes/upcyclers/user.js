@@ -26,7 +26,7 @@ router.get('/profile', (req, res) =>{
 
 
 router.get('/createItem',(req,res)=>{
-   res.render('Products/createProduct', {user:req.user});
+   res.render('products/createProduct', {user:req.user});
 })
 
 router.post("/product/:id",(req,res)=>{
@@ -64,10 +64,8 @@ router.get("/product/:id/edit",(req,res)=>{
   })
 })
 
-
-
-
 router.get('/logout',(req,res)=>{
+  req.session.destroy()
   req.logOut()
   res.redirect('/')
 })

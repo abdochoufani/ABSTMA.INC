@@ -8,16 +8,16 @@ const mongoose = require('mongoose');
 
 
 
-//GET Route to /product
-router.get('/',(req, res)=>{
-  Product.find({}).populate('upcycler')
-  .then( product => {
-    res.render('products/product.hbs', {product: product})
-  }).catch(err =>{
-    res.status(404).send('No products availabe');
-    console.log(`Error occured: ${err}`);
-  })
-});
+// GET Route to /product
+// router.get('/',(req, res)=>{
+//   Product.find({}).populate('upcycler')
+//   .then( product => {
+//     res.render('products/product.hbs', {product: product})
+//   }).catch(err =>{
+//     res.status(404).send('No products availabe');
+//     console.log(`Error occured: ${err}`);
+//   })
+// });
 
 
 

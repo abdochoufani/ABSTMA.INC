@@ -4,7 +4,12 @@ var passport = require("passport")
 const Recycler = require('../../models/recyclers');
 const Product=require('../../models/products')
 
-
+function loggedOutRecycler(req, res, next) {
+    if (req.session && req.user.userType=="recycler") {
+      return res.redirect('/profile');
+    }
+    return next();
+  }
 
 /**********************************Sign up local************************************************** */
 
@@ -20,7 +25,7 @@ router.post("/signup",(req,res,next)=> {debugger;next()},passport.authenticate("
 
 /*******************************Login Google ******************************************************/
 
-router.get("/google/login",passport.authenticate('google-re',{scope: ['profile']}))
+router.get("/google/login", passport.authenticate('google-re',{scope: ['profile']}))
 
 router.get("/login/google/redirect",passport.authenticate('google-re'),(req,res, next)=>{
     res.redirect("/recycler/profile")
@@ -30,7 +35,7 @@ router.get("/login/google/redirect",passport.authenticate('google-re'),(req,res,
 /***************************************Login local ***********************************************/
 
 
-router.get("/login",(req,res)=>{
+router.get("/login",loggedOutRecycler,(req,res)=>{
     res.send('Welcome to the Signup page for recyclers');   
 })
 

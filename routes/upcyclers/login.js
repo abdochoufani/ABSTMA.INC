@@ -3,6 +3,18 @@ var router = express.Router();
 var passport = require("passport")
 var Upcycler = require('../../models/upcyclers');
 
+
+
+
+
+function loggedOutUpcycler(req, res, next) {
+  if (req.session && req.user.userType=="upcycler") {
+    return res.redirect('/profile');
+  }
+  return next();
+}
+
+
 router.get('/', (req, res) => {
   // res.send('Welcome to the page for the Upcyclers');
   Upcycler.find({},(err, upcyclers) => {
@@ -20,7 +32,7 @@ router.post('/signup', passport.authenticate("upcycler-localSignup"),(req,res)=>
 })
 
 
-router.get("/login",(req,res)=>{
+router.get("/login",loggedOutUpcycler,(req,res)=>{
   res.send('Welcome to the Signup page for Upcyclers');
 })
 
@@ -29,7 +41,7 @@ router.post("/login",passport.authenticate("upcycler-localLogin"),(req,res)=>{
 })
 
 
-router.get("/google/login",(req,res,next)=> {debugger;next()}, passport.authenticate('google-up',{scope: ['profile']}))
+router.get("/google/login", passport.authenticate('google-up',{scope: ['profile']}))
 
 router.get("/login/google/redirect",passport.authenticate('google-up'),(req,res)=>{
   debugger

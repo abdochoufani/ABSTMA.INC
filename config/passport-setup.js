@@ -4,6 +4,9 @@ const LocalStrategy=require('passport-local').Strategy
 const Upcycler=require("../models/upcyclers")
 const Recycler=require("../models/recyclers")
 var keys = require('./keys')
+var bcrypt   = require('bcrypt-nodejs');
+
+
 
 
 passport.serializeUser((user,done)=>{
@@ -74,16 +77,16 @@ passport.use("recycler-local-signup", new LocalStrategy({usernameField: "userNam
 passport.use("recycler-localLogin", new LocalStrategy({usernameField: "userName"},
   function(username, password, done) {
     debugger
-    Recycler.findOne({ userName: username }, function(err,recycler) {
+    Recycler.findOne({ userName: username }, function(err,user) {
       debugger
       if (err) { return done(err)}
-      if (!recycler) {return done(null,false)};
-       if(!recycler.validPassword(password)){
-         return done(null, false)
+      if (!user) {return done(null,false)};
+       if(!bcrypt.compareSync(password, user.password)){
+         return done(null,false)
        }
         debugger
-        recycler.userType="recycler"
-        return done(null, recycler);
+        user.userType="recycler"
+        return done(null, user);
     });
   }
 ));

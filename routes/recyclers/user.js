@@ -18,6 +18,7 @@ router.get('/*',(req,res,next)=>{
 
 
   router.get("/logout",(req,res)=>{
+    req.session.destroy()
     req.logout();
 		res.redirect('/');
   })
@@ -41,10 +42,10 @@ router.get('/*',(req,res,next)=>{
   router.get('/products',(req, res)=>{
     Product.find({}).populate('upcycler')
     .then( product => {
-      res.render('Products/product.hbs', {product: product})
+      res.render('products/product.hbs', {product: product})
     }).catch(err =>{
-      res.status(404).send('No products availabe');
-      console.log(`Error occured: ${err}`);
+      res.status(404).send('No products availabe')
+      console.log(`Error occured: ${err}`)
     })
   });
 

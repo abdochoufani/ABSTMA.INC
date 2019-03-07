@@ -29,6 +29,10 @@
     margin: 10px 0;
 }
 
+.single-product-container a {
+    color: rgb(41, 145, 41);
+}
+
 @media (min-width: 1024px) {
     .single-product-container {
         flex-direction: row;

@@ -88,8 +88,9 @@ router.get("/product/:id/edit",(req,res)=>{
 })
 
 
-router.get("/logout",(req,res)=>{
-  req.session.destroy()
-  res.redirect('/');
-})
+// router.get("/logout",(req,res)=>{
+//   req.logOut()
+//   req.session =null
+//   res.redirect('/');
+// })
 module.exports = router;

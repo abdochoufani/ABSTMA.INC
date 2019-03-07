@@ -8,13 +8,6 @@ var indexRouter = require('./routes/index');
 var passport=require("passport")
 var session = require('express-session')
  require('./config/passport-setup')
-
-
-mongoose.connect('mongodb://localhost/abstma', {useNewUrlParser: true})
-.then((db) => {console.log('MongodDB Connectet to ABSTMA Database')
-})
-.catch(err => console.log(`An error was encountered, details: ${err}`));
-
 var app = express();
 var recyclersLogin=require("./routes/recyclers/login")
 var userRouter = require('./routes/recyclers/user');
@@ -38,12 +31,16 @@ app.use(session({
 }))
 
 
+mongoose.connect('mongodb://localhost/abstma', {useNewUrlParser: true})
+.then((db) => {console.log('MongodDB Connectet to ABSTMA Database')
+})
+.catch(err => console.log(`An error was encountered, details: ${err}`));
+
 
 app.use((req,res,next)=>{
-  debugger
   if(req.session.passport){
     if(req.session.passport.user.userType =="recycler") res.locals.recycler = req.session.id
-    else if(req.session.passport.user.userType=="upcycler") res.locals.user = req.session.id
+    else if(req.session.passport.user.userType=="upcycler") res.locals.upcycler = req.session.id
   }
   next()
 })

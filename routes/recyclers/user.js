@@ -16,23 +16,27 @@ router.get('/*',(req,res,next)=>{
        res.render("recycler/profile", {recycler:req.user})
   })
 
-  //
-  router.get('/allUpcyclers', (req, res) =>{
-    Upcycler.find({}).populate('products')
-    .then( upcycler => {
-      debugger
-      res.render('allUpcyclers', {upcycler})
-    })
-    .catch( err => {
-      res.status(404).send('No upcyclers found');
-      console.log(`Error ${err}`);
-    })
-  })
+//Route to display all Upcyclers==============================//
+// Route --> /recycler/allUpcyclers                           //
+  router.get('/allUpcyclers', (req, res) =>{                  // 
+    Upcycler.find({}).populate('products')                    //
+    .then( upcycler => {                                      //
+      debugger                                                // 
+      res.render('allUpcyclers', {upcycler})                  //
+    })                                                        //
+    .catch( err => {                                          //
+      res.status(404).send('No upcyclers found');             //
+      console.log(`Error ${err}`);                            //
+    })                                                        //
+  })                                                          //
+//============================================================//
+
 
  
 
 
   router.get("/logout",(req,res)=>{
+    req.session.destroy();
     req.logout();
 		res.redirect('/');
   })

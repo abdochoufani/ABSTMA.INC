@@ -1,5 +1,25 @@
-{{#each product}}
-<h1>{{name}}</h1>
-<h3>{{description}}</h3>
-
-{{/each}}
+<main class="content">
+    <div class="upcycler-products-container">
+        {{#if product}}
+            {{#each product}}
+                <div class="main-container">
+                <div class="product-container">
+                    <div class="product-image-container">
+                        {{#if imageUrl}}
+                        <img src="{{ imageUrl }}" alt="product-image">
+                        {{else}}
+                        <img src="http://productimages.brambleberry.com/2014_Product/Fragrance_Flavor_Ess/GreenTeaCucumber_FO238_Main_A.jpg" alt="product-image">
+                        {{/if}}
+                    </div>
+                    <h2 class="product-title"><a class="hover-shadow-box-animation" href="/products/product/{{this.id}}">{{this.name}}</a></h2>
+                    <p class="product-description">{{description}}</p>
+                </div>
+            </div>
+            {{/each}}
+        {{else}}
+        <div class="upcycler-product-h1">
+            <h1>This upcycler has no products to display yet</h1>
+        </div>
+        {{/if}}
+    </div>
+</main>

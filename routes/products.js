@@ -23,7 +23,7 @@ router.get('/',(req, res)=>{
 
 // /products
 router.post('/', (req,res)=>{
-  const {name,imageUrl, description,weight,size}=req.body;
+  const {name,imageUrl, description,weight,size,price}=req.body;
   var upcycler = mongoose.Types.ObjectId(req.user.id);
   const newProduct= new Product({
       name,
@@ -32,6 +32,7 @@ router.post('/', (req,res)=>{
       upcycler,
       weight,
       size,
+      price,
   })
   newProduct.save()
       .then(()=>{

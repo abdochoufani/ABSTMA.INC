@@ -6,6 +6,7 @@ const productSchema = new mongoose.Schema({
   imageUrl: String,
   weight: Number,
   size: String,
+  price: Number,
   createdAt: {type: Date, default: Date.now},
   //one Product can be bought by many recycler
   recycler: [{

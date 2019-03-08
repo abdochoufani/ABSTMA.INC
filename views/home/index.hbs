@@ -97,8 +97,12 @@
     <div class="recycler-text">
       <p>Do you want to help save the planet? Or maybe you just want to browse or buy some of some great products made by amazing people on a mission to change the planet.</p>
       <div class="buttons-div">
+        {{#if recycler}}
+        <button onclick="window.location.href='/recycler/profile'">Continue to your profile</button>
+        {{else}}
         <button id="signup-recycler">Sign up</button>
         <button id="login-recycler">Log in</button>
+        {{/if}}
       </div>
     </div>
   </section>
@@ -114,8 +118,12 @@
     <div class="upcycler-text">
       <p>Do you have ideas or products you want to sell? By product we mean made by recycbles.Join us and get the resources you need  while you are on a mission to change the planet.</p>
       <div class="buttons-div">
+        {{#if upcycler}}
+        <button onclick="window.location.href='/upcycler/profile'">Continue to your profile</button>
+        {{else}}
         <button id="signup-upcycler">Sign up</button>
         <button id="login-upcycler">Log in</button>
+        {{/if}}
       </div>
     </div>
   </section>

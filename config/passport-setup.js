@@ -3,7 +3,6 @@ const GoogleStrategy=require('passport-google-oauth20')
 const LocalStrategy=require('passport-local').Strategy
 const Upcycler=require("../models/upcyclers")
 const Recycler=require("../models/recyclers")
-var keys = require('./keys')
 var bcrypt   = require('bcrypt-nodejs');
 require('dotenv').config()
 

@@ -3,20 +3,27 @@ var express = require('express');
 var path = require('path');
 var logger = require('morgan');
 var mongoose=require('mongoose');
-var keys = require('./config/keys');
 var indexRouter = require('./routes/index');
 var passport=require("passport")
 var session = require('express-session')
- require('./config/passport-setup')
 var app = express();
-var recyclersLogin=require("./routes/recyclers/login")
-var userRouter = require('./routes/recyclers/user');
 var upcyclersLogin = require('./routes/upcyclers/login');
 var aboutRouter = require('./routes/about');
-var contactRouter = require('./routes/contact');
 var upcyclerRouter = require('./routes/upcyclers/user');
 var productRouter = require('./routes/products');
+var passport=require("passport")
+var session = require('express-session')
+var passportSetup = require('./config/passport-setup')
 require('dotenv').config()
+
+
+mongoose.connect(process.env.MONGO_DB_URI, {useNewUrlParser: true})
+.then((db) => {console.log('MongodDB Connectet to ABSTMA Database')
+})
+.catch(err => console.log(`An error was encountered, details: ${err}`));
+
+var app = express();
+
 
 
 // view engine setup
@@ -56,7 +63,6 @@ app.use('/recyclers',require("./routes/recyclers/login"))
 app.use('/upcyclers', upcyclersLogin);
 app.use('/upcycler', upcyclerRouter);
 app.use('/about', aboutRouter);
-app.use('/contact', contactRouter);
 app.use('/products', productRouter);
 
 

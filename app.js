@@ -3,7 +3,6 @@ var express = require('express');
 var path = require('path');
 var logger = require('morgan');
 var mongoose=require('mongoose');
-var keys = require('./config/keys');
 var indexRouter = require('./routes/index');
 var recyclersLogin=require("./routes/recyclers/login")
 var userRouter = require('./routes/recyclers/user');
@@ -15,6 +14,7 @@ var productRouter = require('./routes/products');
 var passport=require("passport")
 var session = require('express-session')
 var passportSetup = require('./config/passport-setup')
+require('dotenv').config()
 
 
 mongoose.connect(process.env.MONGO_DB_URI, {useNewUrlParser: true})

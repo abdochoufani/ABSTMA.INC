@@ -1,5 +1,5 @@
 
-var upcycler= $('.upcycler-username').text();
+var recycler= $('.recycler-username').text();
 
 $(function () {
     var socket = io.connect();

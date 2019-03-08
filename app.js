@@ -8,7 +8,6 @@ var recyclersLogin=require("./routes/recyclers/login")
 var userRouter = require('./routes/recyclers/user');
 var upcyclersLogin = require('./routes/upcyclers/login');
 var aboutRouter = require('./routes/about');
-var contactRouter = require('./routes/contact');
 var upcyclerRouter = require('./routes/upcyclers/user');
 var productRouter = require('./routes/products');
 var passport=require("passport")
@@ -53,7 +52,6 @@ app.use('/recyclers',recyclersLogin)
 app.use('/upcyclers', upcyclersLogin);
 app.use('/upcycler', upcyclerRouter);
 app.use('/about', aboutRouter);
-app.use('/contact', contactRouter);
 app.use('/products', productRouter);
 
 

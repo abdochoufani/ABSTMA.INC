@@ -1,8 +1,5 @@
 var express = require('express');
 var router = express.Router();
-const bcrypt = require('bcrypt');
-var cookieParser = require('cookie-parser');
-const saltRounds = 10;
 const Upcycler = require('../../models/upcyclers');
 const Product=require('../../models/products')
 
@@ -88,9 +85,4 @@ router.get("/product/:id/edit",(req,res)=>{
 })
 
 
-// router.get("/logout",(req,res)=>{
-//   req.logOut()
-//   req.session =null
-//   res.redirect('/');
-// })
 module.exports = router;

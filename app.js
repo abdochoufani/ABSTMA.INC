@@ -16,7 +16,7 @@ var aboutRouter = require('./routes/about');
 var contactRouter = require('./routes/contact');
 var upcyclerRouter = require('./routes/upcyclers/user');
 var productRouter = require('./routes/products');
-require('dotenv')
+require('dotenv').config()
 
 
 // view engine setup

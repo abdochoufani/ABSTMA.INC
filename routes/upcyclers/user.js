@@ -8,6 +8,13 @@ const Product=require('../../models/products')
 router.get('/*',(req,res,next)=>{
   if(!req.user || req.user.userType !== "upcycler") res.redirect("/") 
   else next()
+<<<<<<< HEAD
+=======
+}
+
+router.get('/*',authCheckUpcycler,(req,res,next)=>{
+  res.redirect("upcycler/profile")
+>>>>>>> 98b85f158b20501ad9a593d581601cd351b725f8
 })
 
 
@@ -18,7 +25,14 @@ router.get('/profile', (req, res) =>{
 
 
 router.get('/createItem',(req,res)=>{
+<<<<<<< HEAD
    res.render('products/createProduct', {user:req.user});
+=======
+  Upcycler.find({},(err, user)=>{
+      if (err) res.send("error")
+      else res.render('Products/createProduct', {user});
+  })
+>>>>>>> 98b85f158b20501ad9a593d581601cd351b725f8
 })
 
 router.post("/product/:id",(req,res)=>{

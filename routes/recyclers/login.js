@@ -1,8 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var passport = require("passport")
-const Recycler = require('../../models/recyclers');
-const Product=require('../../models/products')
+
 
 function loggedOutRecycler(req, res, next) {
     if (req.session && req.user.userType=="recycler") {

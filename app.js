@@ -10,10 +10,25 @@ var session = require('express-session')
 var app = express();
 var upcyclersLogin = require('./routes/upcyclers/login');
 var aboutRouter = require('./routes/about');
-var contactRouter = require('./routes/contact');
 var upcyclerRouter = require('./routes/upcyclers/user');
 var productRouter = require('./routes/products');
+<<<<<<< HEAD
 require('dotenv').config()
+=======
+var passport=require("passport")
+var session = require('express-session')
+var passportSetup = require('./config/passport-setup')
+require('dotenv').config()
+
+
+mongoose.connect(process.env.MONGO_DB_URI, {useNewUrlParser: true})
+.then((db) => {console.log('MongodDB Connectet to ABSTMA Database')
+})
+.catch(err => console.log(`An error was encountered, details: ${err}`));
+
+var app = express();
+
+>>>>>>> 98b85f158b20501ad9a593d581601cd351b725f8
 
 
 // view engine setup
@@ -23,8 +38,13 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(session({
+<<<<<<< HEAD
   secret: process.env.SESSION_KEY,
   resave: true,
+=======
+  secret:process.env.SESSION_KEY ,
+  resave: false,
+>>>>>>> 98b85f158b20501ad9a593d581601cd351b725f8
   saveUninitialized: true,
 }))
 
@@ -53,7 +73,6 @@ app.use('/recyclers',require("./routes/recyclers/login"))
 app.use('/upcyclers', upcyclersLogin);
 app.use('/upcycler', upcyclerRouter);
 app.use('/about', aboutRouter);
-app.use('/contact', contactRouter);
 app.use('/products', productRouter);
 
 

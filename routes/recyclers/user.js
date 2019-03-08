@@ -65,12 +65,13 @@ router.post('/edit/:id', (req, res) =>{
     userName: req.body.userName,
     companyName: req.body.companyName,
     email: req.body.email, 
-    country: req.body.country,
-    city: req.body.city, 
-    street: req.body.street,
+    address:{country: req.body.country,
+             city: req.body.city, 
+             street: req.body.street},
     imageUrl: req.body.imageUrl,
     description: req.body.description
   }
+  debugger
   Recycler.findByIdAndUpdate(req.params.id, edited, (err) => {
     if (err){ return next(err); }
     res.redirect('/recycler/profile')

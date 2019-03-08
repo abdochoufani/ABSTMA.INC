@@ -16,10 +16,54 @@
                 <p class="keys">Recycler:</p>
                 <p class="recycler-username">{{ recycler.userName }}</p>
             </div>
+             {{#if recycler.companyName}}
+            <div>
+                <p class="keys">Company name:</p>
+                <p>{{ recycler.companyName }}</p>
+            </div>
+            {{else}}
+            <div class="hide"></div>
+            {{/if}}
+            {{#if recycler.description}}
             <div>
                 <p class="keys">Description:</p>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nostrum enim, optio eveniet aspernatur quam rem voluptatum fugit dolore ipsa cumque eaque doloremque incidunt quas sed reiciendis sunt magnam iste debitis.</p>
+                <p>{{ recycler.description }}</p>
             </div>
+            {{else}}
+            <div class="hide"></div>
+            {{/if}}
+            {{#if recycler.website}}
+            <div>
+                <p class="keys">Website:</p>
+                <p>{{ recycler.website }}</p>
+            </div>
+            {{else}}
+            <div class="hide"></div>
+            {{/if}}
+            {{#if recycler.address.country}}
+            <div>
+                <p class="keys">Country:</p>
+                <p>{{ recycler.address.country }}</p>
+            </div>
+            {{else}}
+            <div class="hide"></div>
+            {{/if}}
+            {{#if recycler.address.city}}
+            <div>
+                <p class="keys">City:</p>
+                <p>{{ recycler.address.city }}</p>
+            </div>
+            {{else}}
+            <div class="hide"></div>
+            {{/if}}
+            {{#if recycler.address.street}}
+            <div>
+                <p class="keys">Street:</p>
+                <p>{{ recycler.address.street }}</p>
+            </div>
+            {{else}}
+            <div class="hide"></div>
+            {{/if}}
         </div>
     </div>
 </main>

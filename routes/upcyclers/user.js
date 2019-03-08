@@ -55,9 +55,10 @@ router.post('/edit/:id', (req, res) =>{
     lastName: req.body.lastName,
     userName: req.body.userName,
     email: req.body.email, 
-    country: req.body.country,
-    city: req.body.city, 
-    street: req.body.street,
+    companyName: req.body.companyName,
+    address:{country: req.body.country,
+             city: req.body.city, 
+             street: req.body.street},
     imageUrl: req.body.imageUrl,
     description: req.body.description
   }

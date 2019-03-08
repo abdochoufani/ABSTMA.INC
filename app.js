@@ -16,6 +16,7 @@ var aboutRouter = require('./routes/about');
 var contactRouter = require('./routes/contact');
 var upcyclerRouter = require('./routes/upcyclers/user');
 var productRouter = require('./routes/products');
+require('dotenv')
 
 
 // view engine setup
@@ -25,13 +26,13 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(session({
-  secret: keys.session.cookieKey,
+  secret: process.env.SESSION_KEY,
   resave: true,
   saveUninitialized: true,
 }))
 
 
-mongoose.connect('mongodb://localhost/abstma', {useNewUrlParser: true})
+mongoose.connect(process.env.MONGO_DB_URI, {useNewUrlParser: true})
 .then((db) => {console.log('MongodDB Connectet to ABSTMA Database')
 })
 .catch(err => console.log(`An error was encountered, details: ${err}`));
@@ -76,9 +77,5 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-mongoose.connect('mongodb://localhost/abstma', {useNewUrlParser: true})
-.then((db) => {console.log('MongodDB Connectet to ABSTMA Database')
-})
-.catch(err => console.log(`An error was encountered, details: ${err}`));
 
 module.exports = app;

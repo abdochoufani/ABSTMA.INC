@@ -176,8 +176,8 @@ passport.use("upcycler-localLogin", new LocalStrategy({usernameField: "userName"
 passport.use("google-up",new GoogleStrategy({
   // options for google strategy
   callbackURL:"/upcyclers/login/google/redirect",
-  clientID:keys.google.clientID,
-  clientSecret:keys.google.clientSecret
+  clientID:process.env.GOOGLE_API_CLIENT_ID,
+  clientSecret:process.env.GOOGLE_API_CLIENT_SECRET
 },(accessToken,refreshToken,profile,done)=>{
   debugger
       Upcycler.findOne({googleId:profile.id}).then((upcycler)=>{

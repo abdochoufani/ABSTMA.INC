@@ -17,7 +17,7 @@ var session = require('express-session')
 var passportSetup = require('./config/passport-setup')
 
 
-mongoose.connect('mongodb://localhost/abstma', {useNewUrlParser: true})
+mongoose.connect(process.env.MONGO_DB_URI, {useNewUrlParser: true})
 .then((db) => {console.log('MongodDB Connectet to ABSTMA Database')
 })
 .catch(err => console.log(`An error was encountered, details: ${err}`));
@@ -34,7 +34,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(session({
-  secret: keys.session.cookieKey,
+  secret:process.env.SESSION_KEY ,
   resave: false,
   saveUninitialized: true,
   cookie: { secure: true }

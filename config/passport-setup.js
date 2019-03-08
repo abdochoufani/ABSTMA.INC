@@ -3,7 +3,7 @@ const GoogleStrategy=require('passport-google-oauth20')
 const LocalStrategy=require('passport-local')
 const Upcycler=require("../models/upcyclers")
 const Recycler=require("../models/recyclers")
-var keys = require('./keys')
+require('dotenv').config()
 
 
 passport.serializeUser((user,done)=>{
@@ -133,8 +133,8 @@ passport.use("upcycler-localLogin", new LocalStrategy(
 passport.use(new GoogleStrategy({
   // options for google strategy
   callbackURL:"/recyclers/login/google/redirect",
-  clientID:keys.google.clientID,
-  clientSecret:keys.google.clientSecret
+  clientID:process.env.GOOGLE_API_CLIENT_ID,
+  clientSecret:process.env.GOOGLE_API_CLIENT_SECRET
 },(accessToken,refreshToken,profile,done)=>{
       Recycler.findOne({googleId:profile.id}).then((recycler)=>{
           if (recycler){
@@ -169,8 +169,8 @@ passport.use(new GoogleStrategy({
 passport.use(new GoogleStrategy({
   // options for google strategy
   callbackURL:"/recyclers/login/google/redirect",
-  clientID:keys.google.clientID,
-  clientSecret:keys.google.clientSecret
+  clientID:process.env.GOOGLE_API_CLIENT_ID,
+  clientSecret:process.env.GOOGLE_API_CLIENT_SECRET
 },(accessToken,refreshToken,profile,done)=>{
       Upcycler.findOne({googleId:profile.id}).then((upcycler)=>{
           if (upcycler){

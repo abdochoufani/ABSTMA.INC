@@ -1,9 +1,5 @@
 var express = require('express');
 var router = express.Router();
-<<<<<<< HEAD
-var mongoose=require("mongoose")
-=======
->>>>>>> 98b85f158b20501ad9a593d581601cd351b725f8
 
 
 

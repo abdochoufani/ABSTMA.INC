@@ -6,15 +6,11 @@ var mongoose=require('mongoose');
 var indexRouter = require('./routes/index');
 var passport=require("passport")
 var session = require('express-session')
- require('./config/passport-setup')
 var app = express();
 var upcyclersLogin = require('./routes/upcyclers/login');
 var aboutRouter = require('./routes/about');
 var upcyclerRouter = require('./routes/upcyclers/user');
 var productRouter = require('./routes/products');
-<<<<<<< HEAD
-require('dotenv').config()
-=======
 var passport=require("passport")
 var session = require('express-session')
 var passportSetup = require('./config/passport-setup')
@@ -28,7 +24,6 @@ mongoose.connect(process.env.MONGO_DB_URI, {useNewUrlParser: true})
 
 var app = express();
 
->>>>>>> 98b85f158b20501ad9a593d581601cd351b725f8
 
 
 // view engine setup
@@ -38,13 +33,8 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(session({
-<<<<<<< HEAD
   secret: process.env.SESSION_KEY,
   resave: true,
-=======
-  secret:process.env.SESSION_KEY ,
-  resave: false,
->>>>>>> 98b85f158b20501ad9a593d581601cd351b725f8
   saveUninitialized: true,
 }))
 

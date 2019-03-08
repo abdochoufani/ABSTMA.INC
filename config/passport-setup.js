@@ -3,14 +3,10 @@ const GoogleStrategy=require('passport-google-oauth20')
 const LocalStrategy=require('passport-local').Strategy
 const Upcycler=require("../models/upcyclers")
 const Recycler=require("../models/recyclers")
-<<<<<<< HEAD
 var bcrypt   = require('bcrypt-nodejs');
 require('dotenv').config()
 
 
-=======
-require('dotenv').config()
->>>>>>> 98b85f158b20501ad9a593d581601cd351b725f8
 
 
 passport.serializeUser((user,done)=>{
@@ -99,13 +95,8 @@ passport.use("recycler-localLogin", new LocalStrategy({usernameField: "userName"
 passport.use("google-re",new GoogleStrategy({
   // options for google strategy
   callbackURL:"/recyclers/login/google/redirect",
-<<<<<<< HEAD
   clientID: process.env.GOOGLE_API_CLIENT_ID,
   clientSecret: process.env.GOOGLE_API_CLIENT_SECRET
-=======
-  clientID:process.env.GOOGLE_API_CLIENT_ID,
-  clientSecret:process.env.GOOGLE_API_CLIENT_SECRET
->>>>>>> 98b85f158b20501ad9a593d581601cd351b725f8
 },(accessToken,refreshToken,profile,done)=>{
       debugger
       Recycler.findOne({googleId:profile.id}).then((recycler)=>{
@@ -184,11 +175,7 @@ passport.use("upcycler-localLogin", new LocalStrategy({usernameField: "userName"
 
 passport.use("google-up",new GoogleStrategy({
   // options for google strategy
-<<<<<<< HEAD
   callbackURL:"/upcyclers/login/google/redirect",
-=======
-  callbackURL:"/recyclers/login/google/redirect",
->>>>>>> 98b85f158b20501ad9a593d581601cd351b725f8
   clientID:process.env.GOOGLE_API_CLIENT_ID,
   clientSecret:process.env.GOOGLE_API_CLIENT_SECRET
 },(accessToken,refreshToken,profile,done)=>{

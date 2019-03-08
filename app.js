@@ -3,14 +3,11 @@ var express = require('express');
 var path = require('path');
 var logger = require('morgan');
 var mongoose=require('mongoose');
-var keys = require('./config/keys');
 var indexRouter = require('./routes/index');
 var passport=require("passport")
 var session = require('express-session')
  require('./config/passport-setup')
 var app = express();
-var recyclersLogin=require("./routes/recyclers/login")
-var userRouter = require('./routes/recyclers/user');
 var upcyclersLogin = require('./routes/upcyclers/login');
 var aboutRouter = require('./routes/about');
 var contactRouter = require('./routes/contact');

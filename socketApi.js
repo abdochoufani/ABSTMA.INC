@@ -13,6 +13,7 @@ socketApi.io = io;
 
 io.on('connection', function(socket){
     console.log('A user connected');
+    io.sockets.emit("username",req.user.username)
     socket.on('disconnect', function(){
         console.log('user disconnected');
       });
